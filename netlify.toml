@@ -2,4 +2,4 @@
   publish = "dist"
   command = "pnpm generate"
 [build.environment]
-  NODE_VERSION = "18"
+  NODE_VERSION = "20"

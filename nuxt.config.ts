@@ -1,4 +1,6 @@
 export default defineNuxtConfig({
+  future: { compatibilityVersion: 3 },
+
   routeRules: {
     '/support-me/': { redirect: { to: '/sponsors/', statusCode: 301 } },
     '/timeline/': { redirect: { to: '/about/', statusCode: 301 } },
@@ -22,7 +24,6 @@ export default defineNuxtConfig({
     '@nuxtjs/seo',
     '@nuxt/image',
     '@nuxtjs/plausible',
-    'nuxt-rebundle'
   ],
 
   nitro: {
@@ -66,19 +67,5 @@ export default defineNuxtConfig({
     },
   },
 
-  devtools: {
-    enabled: true
-  },
-
-  experimental: {
-    inlineRouteRules: true,
-    defaults: {
-      useAsyncData: {
-        deep: false,
-      }
-    },
-    headNext: true,
-    sharedPrerenderData: true,
-  },
-  compatibilityDate: '2024-12-14'
+  compatibilityDate: '2025-05-01'
 })
