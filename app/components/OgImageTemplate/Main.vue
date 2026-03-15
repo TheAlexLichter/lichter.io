@@ -17,13 +17,13 @@ const bgGradientStyle = {
       </h1>
       <div class="flex-row flex-nowrap gap-0" style="display: flex;">
         <div class="mr-auto flex-row flex-nowrap gap-0" style="display: flex;">
-          <img width="64" height="64" class="mr-4 rounded-full mt-2" src="/img/me@2x.jpg" />
+          <img style="width: 64px; height: 64px;" class="mr-4 rounded-full mt-2" src="/img/me@2x.jpg" />
           <div class="flex-col gap-0" style="display: flex; justify-content: center;">
             <div class="text-2xl leading-none text-white flex-nowrap gap-0">Alexander Lichter</div>
             <div class="text-white/50 text-lg leading-none mt-2 flex-nowrap gap-0">https://lichter.io</div>
           </div>
         </div>
-        <img width="64" src="/img/logo/glyph-white-colored.svg" />
+        <img style="width: 64px; height: 64px; object-fit: contain;" src="/img/logo/glyph-white-colored.svg" />
       </div>
     </div>
   </div>
