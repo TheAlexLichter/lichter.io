@@ -1,6 +1,4 @@
 export default defineNuxtConfig({
-  future: { compatibilityVersion: 3 },
-
   routeRules: {
     '/support-me/': { redirect: { to: '/sponsors/', statusCode: 301 } },
     '/timeline/': { redirect: { to: '/about/', statusCode: 301 } },
