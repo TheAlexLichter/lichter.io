@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import { load } from 'cheerio';
 
-definePageMeta({
-  documentDriven: false
-})
-
 // disables indexing
 defineRouteRules({
   robots: false,

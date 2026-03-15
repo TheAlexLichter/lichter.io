@@ -1,10 +1,4 @@
 <script setup lang="ts">
-import type { QueryBuilderParams } from '@nuxt/content/dist/runtime/types'
-
-definePageMeta({
-  documentDriven: false
-})
-
 const title = 'Topics'
 const description = 'Being it talks, workshops, panels, podcasts or blog posts, here you can find all my content sorted by topic.'
 
@@ -15,7 +9,7 @@ useSeoMeta({
 
 defineOgImageComponent('Speaking')
 
-const query: QueryBuilderParams = { path: '/topics', only: ['title', '_path'] }
+const { data: topics } = useAsyncData('all-topics', () => queryCollection('topics').select('title', 'path').all())
 </script>
 
 <template>
@@ -27,9 +21,7 @@ const query: QueryBuilderParams = { path: '/topics', only: ['title', '_path'] }
       might interest you.
     </AppParagraph>
     <div class="flex flex-wrap gap-8 mt-8">
-      <ContentList :query="query" v-slot="{ list }">
-        <TopicPreview v-for="topic in list" :key="topic._path" :topic="{ _path: topic._path!, title: topic.title! }" />
-      </ContentList>
+      <TopicPreview v-for="topic in topics" :key="topic.path" :topic="{ path: topic.path, title: topic.title }" />
     </div>
   </AppSection>
 </template>

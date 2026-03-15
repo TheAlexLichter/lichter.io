@@ -53,15 +53,15 @@ export default defineNuxtConfig({
   },
 
   content: {
-    documentDriven: true,
-    highlight: {
-      theme: 'vitesse-dark'
-    },
-    markdown: {
-      remarkPlugins: ['remark-reading-time'],
-      rehypePlugins: {
-        'rehype-external-links': false
-      }
+    build: {
+      markdown: {
+        remarkPlugins: {
+          'remark-reading-time': {},
+        },
+        highlight: {
+          theme: 'vitesse-dark',
+        },
+      },
     },
   },
 

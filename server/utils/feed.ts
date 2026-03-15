@@ -1,7 +1,7 @@
 // Credits to https://github.com/harlan-zw/harlanzw.com/blob/main/server/routes/feed.xml.ts
 import { Feed } from 'feed'
 import * as cheerio from 'cheerio'
-import { serverQueryContent } from '#content/server'
+import { queryCollection } from '@nuxt/content/server'
 import type { H3Event } from 'h3'
 
 export async function generateBlogFeed(event: H3Event) {
@@ -21,13 +21,11 @@ export async function generateBlogFeed(event: H3Event) {
     },
   })
 
-  const posts = await serverQueryContent(event, 'articles').sort({ datePublished: -1 }).find()
+  const posts = await queryCollection(event, 'articles').order('datePublished', 'DESC').all()
 
   for (const post of posts) {
-    if (post._path === '/articles')
-      continue
     // this will return the SSR content of the post
-    const content = await $fetch<string>(`${post._path}/`)
+    const content = await $fetch<string>(`${post.path}/`)
     let $ = cheerio.load(content)
     const prose = $('.prose').html()
     $ = cheerio.load(prose!)
@@ -38,8 +36,8 @@ export async function generateBlogFeed(event: H3Event) {
     })
     const item = {
       title: post.title,
-      id: withSiteUrl(event, post._path),
-      link: withSiteUrl(event, post._path),
+      id: withSiteUrl(event, post.path),
+      link: withSiteUrl(event, post.path),
       description: post.description,
       content: $('body').html(),
       author: [

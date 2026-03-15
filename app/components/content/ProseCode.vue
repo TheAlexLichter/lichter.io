@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import type { Lang } from 'shiki-es'
 
-defineProps<{
-  code: string,
-  language: Lang,
+const props = defineProps<{
+  code?: string,
+  language?: string,
   filename?: string,
   highlights?: number[],
   meta?: string
@@ -20,6 +19,6 @@ const hovered = ref(false)
     </span>
     <slot />
 
-    <ProseCodeCopyButton :content="code" />
+    <ProseCodeCopyButton v-if="code" :content="code" />
   </div>
 </template>

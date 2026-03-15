@@ -1,13 +1,4 @@
 <script setup lang="ts">
-import type { QueryBuilderParams } from '@nuxt/content/dist/runtime/types'
-import type { Talk } from '~/types.js';
-
-// TODO: Remove type casting after https://github.com/nuxt/content/pull/2156 landed
-
-definePageMeta({
-  documentDriven: false
-})
-
 const title = 'Talks and Podcast'
 const description = `Take a look at my talks, podcast appearances and panels I have given or participated in. Topics are among others Vue.js, Nuxt.js, TypeScript, JavaScript, Web Development, Performance, Clean Code as well as my personal story and experiences.`
 
@@ -20,7 +11,7 @@ defineOgImageComponent('Speaking', {
   title: 'Talks and Podcasts'
 })
 
-const query: QueryBuilderParams = { path: '/speaking', sort: [{ date: -1 }], without: ['body', 'excerpt'] }
+const { data: talks } = useAsyncData('all-speaking', () => queryCollection('speaking').order('date', 'DESC').select('id', 'path', 'title', 'description', 'date', 'eventName', 'eventUrl', 'location', 'slidesUrl', 'videoUrl', 'podcastUrl', 'type', 'topics').all())
 </script>
 
 <template>
@@ -33,9 +24,7 @@ const query: QueryBuilderParams = { path: '/speaking', sort: [{ date: -1 }], wit
       slides, videos or recording link!
     </AppParagraph>
     <div class="space-y-8 mt-8">
-      <ContentList :query="query" v-slot="{ list }">
-        <SpeakingPreview v-for="entry in list" :key="entry._path" :talk="(entry as Talk)" />
-      </ContentList>
+      <SpeakingPreview v-for="entry in talks" :key="entry.path" :talk="entry" />
     </div>
   </AppSection>
 </template>

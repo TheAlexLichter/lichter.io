@@ -1,8 +1,4 @@
 <script setup lang="ts">
-definePageMeta({
-  documentDriven: false
-})
-
 const title = 'Consulting'
 const description = 'Companies reach out to help them build better TypeScript, Vue and/or Nuxt applications - from solving problems to discussing the right abstractions and architecture. Learn more about the services I offer.'
 

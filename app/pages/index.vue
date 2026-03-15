@@ -1,10 +1,4 @@
 <script setup lang="ts">
-import type { ArticlePreview, TalkPreview } from '~/types.js';
-
-definePageMeta({
-  documentDriven: false
-})
-
 const description = `I am Alex, a German web engineering consultant based in Amsterdam. I help companies to build better web applications and to improve their knowledge, workflows, and culture. My expertise in JavaScript, TypeScript, Vue.js, and Nuxt.js is highly valued by clients all around the world`
 
 useSeoMeta({
@@ -15,18 +9,11 @@ useSeoMeta({
 
 defineOgImageComponent('Main')
 
-const { data: articles } = useAsyncData('latest-articles', () => queryContent<ArticlePreview>('/articles').sort({
-  dateModified: -1,
-  datePublished: -1
-}).without(['body', 'excerpt']).limit(4).find())
+const { data: articles } = useAsyncData('latest-articles', () => queryCollection('articles').order('dateModified', 'DESC').order('datePublished', 'DESC').select('id', 'path', 'title', 'description', 'datePublished', 'dateModified', 'topics').limit(4).all())
 
-const { data: talks } = useAsyncData('latest-speaking', () => queryContent<TalkPreview>('/speaking/').sort({
-  date: -1
-}).without(['body', 'excerpt']).limit(5).find())
+const { data: talks } = useAsyncData('latest-speaking', () => queryCollection('speaking').order('date', 'DESC').select('id', 'path', 'title', 'description', 'date', 'eventName', 'eventUrl', 'location', 'slidesUrl', 'videoUrl', 'podcastUrl', 'type', 'topics').limit(5).all())
 
-const { data: workshops } = useAsyncData('latest-workshops', () => queryContent('/workshops/').sort({
-  onStartPage: 1
-}).without(['body', 'excerpt']).limit(3).find())
+const { data: workshops } = useAsyncData('latest-workshops', () => queryCollection('workshops').select('id', 'path', 'title', 'description', 'time', 'topics').limit(3).all())
 </script>
 
 <template>
@@ -137,7 +124,7 @@ const { data: workshops } = useAsyncData('latest-workshops', () => queryContent(
         </div>
       </div>
       <div class="grid md:grid-cols-2 gap-12 justify-around mt-8">
-        <ArticlePreview v-for="article in articles" :key="article._id" :article="article" />
+        <ArticlePreview v-for="article in articles" :key="article.id" :article="article" />
       </div>
       <div class="flex md:justify-end mt-8">
         <AppButton to="/articles" look="secondary" secondary-after-bg="bg-zinc-900">View all articles</AppButton>
@@ -158,7 +145,7 @@ const { data: workshops } = useAsyncData('latest-workshops', () => queryContent(
         </div>
       </div>
       <div class="flex flex-col space-y-8 mt-8">
-        <SpeakingPreview v-for="talk in talks" :key="talk._id" :talk="talk" />
+        <SpeakingPreview v-for="talk in talks" :key="talk.id" :talk="talk" />
       </div>
       <div class="flex md:justify-end mt-16">
         <AppButton to="/speaking/" look="secondary">View all talks</AppButton>

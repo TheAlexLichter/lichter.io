@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import type { ArticlePreview } from '~/types'
-
 const props = defineProps<{
-  article: ArticlePreview
+  article: any
 }>()
 
 const formattedCreatedAt = computed(() => formatDateStringToHumanReadable(props.article.datePublished))
 </script>
 
 <template>
-  <AppLink :to="article._path"
+  <AppLink :to="article.path"
     class="inline-block group border-l-4 border-red-500 relative flex flex-col justify-between hover:bg-gradient-to-r hover:-translate-y-2 hover:border-zinc-300 transition-all duration-500 from-red-500/60 to-pink-600/60 p-8 bg-zinc-800">
     <AppParagraph tag="h3" class="text-2xl font-semibold">{{ article.title }}</AppParagraph>
     <div class="mt-4 md:mt-2 md:flex gap-4">

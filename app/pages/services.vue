@@ -1,8 +1,4 @@
 <script setup lang="ts">
-definePageMeta({
-  documentDriven: false
-})
-
 const title = 'Services'
 const description = 'Take a look at the services I offer, including web engineering consulting, workshops for various topics and more.'
 

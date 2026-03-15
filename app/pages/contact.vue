@@ -1,8 +1,4 @@
 <script setup lang="ts">
-definePageMeta({
-  documentDriven: false
-})
-
 const title = 'Contact me'
 const description = 'Reach out for a project or consulting inquiry, to give feedback or just to say hi. Easiest via email or one of the social media platforms below'
 

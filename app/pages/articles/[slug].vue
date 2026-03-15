@@ -1,10 +1,18 @@
 <script setup lang="ts">
-import type { ParsedContent } from '@nuxt/content';
-import { onContentNotFound } from '~/utils/content.js';
+const route = useRoute()
 
-const { page: article, next, prev } = useContent()
+const { data: article } = await useAsyncData(`article-${route.params.slug}`, () => queryCollection('articles').path(`/articles/${route.params.slug}`).first())
 
-onContentNotFound(article)
+if (!article.value) {
+  throw createError({ statusCode: 404, fatal: true })
+}
+
+provide('content-toc', computed(() => article.value?.body?.toc))
+
+const { data: surround } = await useAsyncData(`article-surround-${route.params.slug}`, () => queryCollectionItemSurroundings('articles', `/articles/${route.params.slug}`, { fields: ['title', 'path', 'description', 'datePublished', 'dateModified', 'topics'] }))
+
+const prev = computed(() => surround.value?.[0])
+const next = computed(() => surround.value?.[1])
 
 useSchemaOrg([
   defineArticle({
@@ -15,7 +23,7 @@ useSchemaOrg([
 ])
 
 const isOlderThanOneYear = computed(() => {
-  const dateModified = new Date(article.value.dateModified)
+  const dateModified = new Date(article.value!.dateModified)
 
   const oneYearAgo = new Date()
   oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1)
@@ -23,19 +31,18 @@ const isOlderThanOneYear = computed(() => {
   return dateModified < oneYearAgo
 })
 
-const formattedUpdateAt = computed(() => formatDateStringToHumanReadable(article.value.dateModified))
-const formattedCreatedAt = computed(() => formatDateStringToHumanReadable(article.value.datePublished))
+const formattedUpdateAt = computed(() => formatDateStringToHumanReadable(article.value!.dateModified))
+const formattedCreatedAt = computed(() => formatDateStringToHumanReadable(article.value!.datePublished))
 
-const route = useRoute()
 const linkToCurrentPage = withSiteUrl(route.path)
 
 const links = computed(() => {
-  const rawShareOnTwitter = `https://twitter.com/intent/tweet?text=I just read "${article.value.title}". Check it out!&url=${linkToCurrentPage.value}&via=TheAlexLichter`
+  const rawShareOnTwitter = `https://twitter.com/intent/tweet?text=I just read "${article.value!.title}". Check it out!&url=${linkToCurrentPage.value}&via=TheAlexLichter`
   const shareOnTwitter = encodeURI(rawShareOnTwitter.replace(/#/g, 'No. '))
 
   const rawDiscussOnTwitter = `https://twitter.com/search?q=${linkToCurrentPage.value}`
 
-  const editOnGitHub = `https://github.com/manniL/lichter.io/edit/main/content/${article.value._file}`
+  const editOnGitHub = `https://github.com/manniL/lichter.io/edit/main/content/${article.value!.stem}${article.value!.extension}`
   return {
     shareOnTwitter,
     discussOnTwitter: encodeURI(rawDiscussOnTwitter),
@@ -55,15 +62,14 @@ async function copyLinkToClipboard(): Promise<void> {
   })
 }
 
-// TODO: This should not be necessary. `surround` is buggy?
-function isArticle(entry?: ParsedContent): Boolean {
-  return Boolean(entry?._path?.startsWith('/articles/'))
+function isArticle(entry?: { path?: string } | null): boolean {
+  return Boolean(entry?.path?.startsWith('/articles/'))
 }
 
 defineOgImageComponent('Article', {
   title: article.value.title,
   topics: article.value.topics,
-  readingTime: article.value.readingTime.text,
+  readingTime: article.value.readingTime?.text,
   datePublished: formattedUpdateAt.value
 })
 </script>
@@ -73,15 +79,15 @@ defineOgImageComponent('Article', {
       <AppLinkBack to="/articles/">All articles</AppLinkBack>
       <ParagraphDecoration class="mt-4" />
       <AppParagraph class="mt-4" look="heading" tag="h1">
-        {{ article.title }}
+        {{ article!.title }}
       </AppParagraph>
       <div class="flex flex-col md:flex-row gap-4 md:gap-0 justify-between mt-8">
         <div class="flex">
           <p class="mr-2">Updated at {{ formattedUpdateAt }}</p>
-          <p>&mdash; {{ article.readingTime.text }}</p>
+          <p v-if="article!.readingTime">&mdash; {{ article!.readingTime.text }}</p>
         </div>
         <ul class="flex gap-8">
-          <li v-for="topic in article.topics">
+          <li v-for="topic in article!.topics">
             <AppLink class="hover:underline" :to="`/topics/${topic}`">#{{ topic }}</AppLink>
           </li>
         </ul>
@@ -90,7 +96,7 @@ defineOgImageComponent('Article', {
     <AppSection class="justify-center bg-zinc-900 pb-8">
       <div>
         <ArticleAgeWarning v-if="isOlderThanOneYear" />
-        <ContentDoc class="prose md:prose-lg lg:prose-xl" :class="isOlderThanOneYear ? 'pt-8' : 'pt-4'" />
+        <ContentRenderer class="prose md:prose-lg lg:prose-xl" :class="isOlderThanOneYear ? 'pt-8' : 'pt-4'" :value="article!" />
       </div>
       <div class="mt-16 md:mt-32">
         <div class="flex flex-col md:flex-row justify-between items-center gap-y-2 md:gap-0 mt-2">
@@ -106,7 +112,7 @@ defineOgImageComponent('Article', {
               Copy link
             </button>
           </div>
-          <p v-if="article.datePublished !== article.dateModified"
+          <p v-if="article!.datePublished !== article!.dateModified"
             class="order-4 md:order-2 text-sm md:inline text-zinc-300">
             Originally published at {{ formattedCreatedAt }}
           </p>
@@ -142,8 +148,8 @@ defineOgImageComponent('Article', {
     </AppSection>
     <AppSection>
       <div class="flex flex-col gap-8 justify-between mt-16 md:flex-row md:gap-32 md:mt-24">
-        <LazyArticlePreview v-if="isArticle(prev)" :article="prev" />
-        <LazyArticlePreview v-if="isArticle(next)" :article="next" />
+        <LazyArticlePreview v-if="isArticle(prev)" :article="prev!" />
+        <LazyArticlePreview v-if="isArticle(next)" :article="next!" />
       </div>
     </AppSection>
   </div>

@@ -1,38 +1,18 @@
 <script setup lang="ts">
-import type { QueryBuilderParams } from '@nuxt/content/dist/runtime/types'
-import { onContentNotFound } from '~/utils/content.js'
-
-const { page } = useContent()
-
-onContentNotFound(page)
-
 const route = useRoute()
+const slug = route.params.slug as string
 
-const baseQuery = {
-  where: [{ topics: { $contains: route.params.slug } }]
+const { data: page } = await useAsyncData(`topic-${slug}`, () => queryCollection('topics').path(`/topics/${slug}`).first())
+
+if (!page.value) {
+  throw createError({ statusCode: 404, fatal: true })
 }
 
-const articleQuery: QueryBuilderParams = {
-  ...baseQuery,
-  path: '/articles/',
-  sort: [{
-    dateModified: -1,
-    datePublished: -1
-  }]
-}
+const { data: workshops } = useAsyncData(`topic-workshops-${slug}`, () => queryCollection('workshops').where('topics', 'LIKE', `%${slug}%`).all())
 
-const speakingQuery: QueryBuilderParams = {
-  ...baseQuery,
-  path: '/speaking/',
-  sort: [{
-    date: -1,
-  }]
-}
+const { data: articles } = useAsyncData(`topic-articles-${slug}`, () => queryCollection('articles').where('topics', 'LIKE', `%${slug}%`).order('dateModified', 'DESC').order('datePublished', 'DESC').all())
 
-const workshopQuery: QueryBuilderParams = {
-  ...baseQuery,
-  path: '/workshops/'
-}
+const { data: talks } = useAsyncData(`topic-speaking-${slug}`, () => queryCollection('speaking').where('topics', 'LIKE', `%${slug}%`).order('date', 'DESC').all())
 
 const title = `Topic: ${page.value.title}`
 const description = `Being it talks, workshops, panels, podcasts or blog posts, here you can find all my content sorted by topic.`
@@ -50,45 +30,36 @@ defineOgImageComponent('Speaking')
       <AppLinkBack to="/topics/">To topic selection</AppLinkBack>
       <ParagraphDecoration class="mt-4" />
       <AppParagraph class="mt-4" look="heading" tag="h1">
-        Topic: {{ page.title }}
+        Topic: {{ page!.title }}
       </AppParagraph>
     </AppSection>
     <AppSection class="justify-center pb-8">
-      <ContentList :query="workshopQuery">
-        <template #default="{ list }">
-          <AppParagraph class="pt-16 !text-4xl" look="heading" tag="h2">
-            Workshops
-          </AppParagraph>
-          <div class="space-y-8 md:space-y-0 md:grid grid-cols-2 gap-12 justify-around my-8">
-            <WorkshopPreview v-for="entry in list" :key="entry._path" :workshop="entry" />
-          </div>
-        </template>
-        <template #not-found></template>
-      </ContentList>
+      <template v-if="workshops?.length">
+        <AppParagraph class="pt-16 !text-4xl" look="heading" tag="h2">
+          Workshops
+        </AppParagraph>
+        <div class="space-y-8 md:space-y-0 md:grid grid-cols-2 gap-12 justify-around my-8">
+          <WorkshopPreview v-for="entry in workshops" :key="entry.path" :workshop="entry" />
+        </div>
+      </template>
 
-      <ContentList :query="articleQuery">
-        <template #default="{ list }">
-          <AppParagraph class="pt-16 !text-4xl" look="heading" tag="h2">
-            Articles
-          </AppParagraph>
-          <div class="grid md:grid-cols-2 gap-y-16 md:gap-8 my-8">
-            <ArticlePreview v-for="entry in list" :key="entry._path" :article="entry" />
-          </div>
-        </template>
-        <template #not-found></template>
-      </ContentList>
+      <template v-if="articles?.length">
+        <AppParagraph class="pt-16 !text-4xl" look="heading" tag="h2">
+          Articles
+        </AppParagraph>
+        <div class="grid md:grid-cols-2 gap-y-16 md:gap-8 my-8">
+          <ArticlePreview v-for="entry in articles" :key="entry.path" :article="entry" />
+        </div>
+      </template>
 
-      <ContentList :query="speakingQuery">
-        <template #default="{ list }">
-          <AppParagraph class="pt-16 !text-4xl" look="heading" tag="h2">
-            Talks & Podcasts
-          </AppParagraph>
-          <div class="space-y-8 my-8">
-            <SpeakingPreview v-for="entry in list" :key="entry._path" :talk="entry" />
-          </div>
-        </template>
-        <template #not-found></template>
-      </ContentList>
+      <template v-if="talks?.length">
+        <AppParagraph class="pt-16 !text-4xl" look="heading" tag="h2">
+          Talks & Podcasts
+        </AppParagraph>
+        <div class="space-y-8 my-8">
+          <SpeakingPreview v-for="entry in talks" :key="entry.path" :talk="entry" />
+        </div>
+      </template>
     </AppSection>
   </div>
 </template>

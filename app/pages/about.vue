@@ -1,8 +1,4 @@
 <script setup lang="ts">
-definePageMeta({
-  documentDriven: false
-})
-
 const title = 'About'
 const description = 'Find out or about me as a person, my personal history, my business and open source contributions.'
 

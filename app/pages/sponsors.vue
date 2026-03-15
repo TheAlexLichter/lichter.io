@@ -1,8 +1,4 @@
 <script setup lang="ts">
-definePageMeta({
-  documentDriven: false
-})
-
 const title = 'Support me'
 const description = 'If you like my content and want to support me, you can do so via a donation or by buying me a coffee.'
 

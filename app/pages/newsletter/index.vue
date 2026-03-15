@@ -1,8 +1,4 @@
 <script setup lang="ts">
-definePageMeta({
-  documentDriven: false
-})
-
 const title = 'Newsletter'
 const description = 'Subscribe to my newsletter to get notified about new articles, talks, and other content I publish. No spam, I promise!'
 

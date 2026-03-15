@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import type { TalkPreview } from '~/types.js';
-
 const props = defineProps<{
-  talk: TalkPreview
+  talk: any
 }>()
 
 // TODO: Differentiate between german and english items
@@ -32,7 +30,7 @@ function handleMouseLeave() {
     <div>
       <header class="flex-grow">
         <AppLink class="transition-all underline decoration-transparent hover:decoration-white"
-          @mouseover="handleMouseOver" @mouseleave="handleMouseLeave" :to="talk._path">
+          @mouseover="handleMouseOver" @mouseleave="handleMouseLeave" :to="talk.path">
           <AppParagraph tag="h3" class="inline text-2xl font-semibold">{{ talk.title }}</AppParagraph>
         </AppLink>
       </header>
@@ -81,7 +79,7 @@ function handleMouseLeave() {
       </ul>
       <AppLink
         class="underline decoration-transparent hover:decoration-white transition-all mt-8 md:mt-0 text-right md:text-left"
-        @mouseover="handleMouseOver" @mouseleave="handleMouseLeave" :to="talk._path"
+        @mouseover="handleMouseOver" @mouseleave="handleMouseLeave" :to="talk.path"
         :title="`Read more about ${talk.title}`">
         Read more
         <Icon name="heroicons:chevron-double-right-20-solid" />

@@ -1,13 +1,17 @@
 <script setup lang="ts">
-import { onContentNotFound } from '~/utils/content.js';
+const route = useRoute()
 
-const { page: workshop } = useContent()
+const { data: workshop } = await useAsyncData(`workshop-${route.params.slug}`, () => queryCollection('workshops').path(`/workshops/${route.params.slug}`).first())
 
-onContentNotFound(workshop)
+if (!workshop.value) {
+  throw createError({ statusCode: 404, fatal: true })
+}
+
+provide('content-toc', computed(() => workshop.value?.body?.toc))
 
 const requestQuoteLink = computed(() => {
   const prefix = 'mailto:alichter@developmint.de?subject=Workshop request: '
-  const title = workshop.value.title
+  const title = workshop.value!.title
   const suffix = `&body=Hi Alex,%0D%0A%0D%0Awe would like to request a quote for the ${title} workshop.%0D%0A%0D%0A
 
   Desired/Possible dates: %0D%0A
@@ -36,15 +40,15 @@ defineOgImageComponent('Workshop', {
       <AppLinkBack to="/workshops/">All Workshops</AppLinkBack>
       <ParagraphDecoration class="mt-4" />
       <AppParagraph class="mt-4" look="heading" tag="h1">
-        {{ workshop.title }}
+        {{ workshop!.title }}
       </AppParagraph>
-      <WorkshopDetails :time="workshop.time" class="mt-8 space-y-2 md:space-y-0 md:flex gap-8" />
+      <WorkshopDetails :time="workshop!.time" class="mt-8 space-y-2 md:space-y-0 md:flex gap-8" />
     </AppSection>
     <AppSection class="bg-zinc-900 !pb-0" inner-class="border-b border-zinc-800">
       <div class="md:grid grid-cols-2 justify-center gap-8 pb-16">
         <div>
           <div class="prose md:prose-lg lg:prose-xl pt-0.5">
-            <ContentDoc />
+            <ContentRenderer :value="workshop!" />
           </div>
           <AppButton :to="requestQuoteLink" class="hidden md:block mt-8 text-xl">Request quote</AppButton>
         </div>
