@@ -27,12 +27,12 @@ props.title.length > 30 ? 'text-5xl' : 'text-6xl')
         </h1>
       </div>
       <!-- Weird hack so the lower line is correct when rendering svg -->
-      <div style="display: flex; margin-top: -6rem;">
-        <div class="mr-auto" style="display: flex;">
+      <div class="flex-row flex-nowrap gap-0" style="display: flex; margin-top: -6rem;">
+        <div class="mr-auto flex-row flex-nowrap gap-0" style="display: flex;">
           <img width="64" height="64" class="mr-4 rounded-full mt-2" src="/img/me@2x.jpg" />
-          <div style="display: flex; flex-direction: column; justify-content: center;">
-            <div class="text-2xl leading-none text-white">Alexander Lichter</div>
-            <div class="text-white/50 text-lg leading-none mt-2">https://lichter.io</div>
+          <div class="flex-col gap-0" style="display: flex; justify-content: center;">
+            <div class="text-2xl leading-none text-white flex-nowrap gap-0">Alexander Lichter</div>
+            <div class="text-white/50 text-lg leading-none mt-2 flex-nowrap gap-0">https://lichter.io</div>
           </div>
         </div>
         <img width="64" src="/img/logo/glyph-white-colored.svg" />
