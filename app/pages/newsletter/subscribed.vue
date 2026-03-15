@@ -1,11 +1,4 @@
 <script setup lang="ts">
-import { load } from 'cheerio';
-
-// disables indexing
-defineRouteRules({
-  robots: false,
-})
-
 type State = 'loading' | 'error' | 'subscribed'
 const route = useRoute()
 const state = ref<State>('loading')

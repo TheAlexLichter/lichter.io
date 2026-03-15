@@ -3,7 +3,8 @@ export default defineNuxtConfig({
     '/support-me/': { redirect: { to: '/sponsors/', statusCode: 301 } },
     '/timeline/': { redirect: { to: '/about/', statusCode: 301 } },
     '/slides/**': { redirect: { to: 'https://slides.com/mannil/**', statusCode: 302 } },
-    '/nuxt-dynamic-ssr-spa/': { redirect: { to: '/nuxt3-dynamic-ssr-spa/', statusCode: 301 } }
+    '/nuxt-dynamic-ssr-spa/': { redirect: { to: '/nuxt3-dynamic-ssr-spa/', statusCode: 301 } },
+    '/newsletter/subscribed': { robots: false },
   },
 
   runtimeConfig: {
