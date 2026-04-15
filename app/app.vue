@@ -147,7 +147,9 @@ function useSiteNotifications() {
   </div>
 </template>
 
-<style lang="pcss">
+<style>
+@reference "~/assets/css/main.css";
+
 ::selection {
   @apply bg-red-500/25;
 }

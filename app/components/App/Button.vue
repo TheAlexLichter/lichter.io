@@ -4,7 +4,7 @@ import type { RouteRecordRaw } from 'vue-router';
 const STYLES = {
   primary: {
     needsPseudo: false,
-    all: 'text-white uppercase font-semibold sm:font-bold bg-gradient-to-r from-red-500 via-pink-700 to-red-500 bg-200% hover:animate-bg-shift px-4 py-2',
+    all: 'text-white uppercase font-semibold sm:font-bold bg-gradient-to-r from-red-500 via-pink-700 to-red-500 bg-[size:200%] hover:animate-bg-shift px-4 py-2',
   },
   secondary: {
     needsPseudo: true,

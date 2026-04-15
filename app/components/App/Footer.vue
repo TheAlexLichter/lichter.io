@@ -198,11 +198,11 @@ async function subscribeToNewsletter() {
         <form id="newsletter" @submit.prevent="subscribeToNewsletter" class="mt-6 sm:flex sm:max-w-md lg:mt-0">
           <label for="email-address" class="sr-only">Email address</label>
           <input v-model="form.name" type="text" name="name" id="firstname" required
-            class="w-full min-w-0 appearance-none border-0 bg-white/5 px-3 py-1.5 text-base text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-pink-500 sm:w-64 sm:text-sm sm:leading-6 xl:w-full mr-2"
+            class="w-full min-w-0 appearance-none border-0 bg-white/5 px-3 py-1.5 text-base text-white shadow-xs ring-1 ring-inset ring-white/10 placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-pink-500 sm:w-64 sm:text-sm sm:leading-6 xl:w-full mr-2"
             placeholder="First name" />
           <br>
           <input v-model="form.email" type="email" name="email-address" id="email-address" autocomplete="email" required
-            class="w-full min-w-0 appearance-none border-0 bg-white/5 px-3 py-1.5 text-base text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-pink-500 sm:w-64 sm:text-sm sm:leading-6 xl:w-full mt-2 sm:mt-0"
+            class="w-full min-w-0 appearance-none border-0 bg-white/5 px-3 py-1.5 text-base text-white shadow-xs ring-1 ring-inset ring-white/10 placeholder:text-gray-500 focus:ring-2 focus:ring-inset focus:ring-pink-500 sm:w-64 sm:text-sm sm:leading-6 xl:w-full mt-2 sm:mt-0"
             placeholder="Email" />
           <div class="mt-4 sm:ml-4 sm:mt-0 sm:flex-shrink-0">
             <AppButton type="submit" look="primary">

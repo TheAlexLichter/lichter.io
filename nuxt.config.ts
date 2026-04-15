@@ -1,4 +1,8 @@
+import tailwindcss from '@tailwindcss/vite'
+import type { PluginOption } from 'vite'
+
 export default defineNuxtConfig({
+  css: ['~/assets/css/main.css'],
   routeRules: {
     '/support-me/': { redirect: { to: '/sponsors/', statusCode: 301 } },
     '/timeline/': { redirect: { to: '/about/', statusCode: 301 } },
@@ -15,8 +19,13 @@ export default defineNuxtConfig({
     }
   },
 
+  vite: {
+    plugins: [
+      tailwindcss() as PluginOption,
+    ],
+  },
+
   modules: [
-    '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
     '@nuxt/icon',
     '@nuxt/content',
