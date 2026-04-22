@@ -1,5 +1,3 @@
 https://lichterio.netlify.app/*       https://www.lichter.io/:splat 301!
 https://lichter.io/*                  https://www.lichter.io/:splat 301!
-
-# Newsletter API
-/api/newsletter/*                     https://lichter-io-newsletter.netlify.app/:splat 200!
+https://lichter-io.void.app/*         https://www.lichter.io/:splat 301!

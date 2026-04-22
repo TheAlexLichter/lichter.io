@@ -110,11 +110,11 @@ Thanks to everyone for the support and feedback, as well as for the ideas for ne
 
 :blog-image{src="/img/blog/2023-my-recap/youtube-stats.jpg" alt="YouTube stats for 2023 showing 16 videos, 27.000+ views and 1.500+ subscribers" width="892" height="374"}
 
-### Newsletter
+### ~~Newsletter~~
 
-And yes, I also started a newsletter with the website launch, which I want to continue and actually highlight in 2024. I'm not sure yet how often I want to send it out - so far, I didn't due to the lack of time. But I hope to find a good schedule for it in 2024.
+~~And yes, I also started a newsletter with the website launch, which I want to continue and actually highlight in 2024. I'm not sure yet how often I want to send it out - so far, I didn't due to the lack of time. But I hope to find a good schedule for it in 2024.~~
 
-You can [subscribe to it now](/newsletter/) already!
+**Update:** The newsletter didn't work out — I didn't have the time to keep it going, so I've shut it down.
 
 ## Business
 
@@ -144,7 +144,7 @@ To finish this years recap, I want to set some goals for 2024 that I want to ach
   * Become a YouTube partner
   * Write minimum 4 blog posts
   * Do a livestream on Twitch every quarter, at least.
-  * Send out the first newsletter, then decide on a schedule (possibly 1x a quarter?)
+  * ~~Send out the first newsletter, then decide on a schedule (possibly 1x a quarter?)~~
 * Speaking
   * Be a speaker at ~8 conferences or meetups - I want to continue speaking at conferences and meetups and share my knowledge with the community. No fixed number here, but I think 8 is a good baseline. I want to pick the conferences I speak at more carefully and focus on the ones that I really want to attend.
 * Business

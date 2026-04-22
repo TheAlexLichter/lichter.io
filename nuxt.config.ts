@@ -8,7 +8,6 @@ export default defineNuxtConfig({
     '/timeline/': { redirect: { to: '/about/', statusCode: 301 } },
     '/slides/**': { redirect: { to: 'https://slides.com/mannil/**', statusCode: 302 } },
     '/nuxt-dynamic-ssr-spa/': { redirect: { to: '/nuxt3-dynamic-ssr-spa/', statusCode: 301 } },
-    '/newsletter/subscribed': { robots: false },
   },
 
   runtimeConfig: {
@@ -43,9 +42,6 @@ export default defineNuxtConfig({
         '/feed.xml',
       ],
     },
-    devProxy: {
-      '/api/newsletter': { target: 'https://lichter-io-newsletter.netlify.app', changeOrigin: true }
-    }
   },
 
   site: {
