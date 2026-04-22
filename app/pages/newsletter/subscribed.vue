@@ -3,6 +3,10 @@ type State = 'loading' | 'error' | 'subscribed'
 const route = useRoute()
 const state = ref<State>('loading')
 const possibleError = ref()
+
+useSeoMeta({
+  title: 'Your Newsletter Subscription',
+})
 onMounted(async () => {
   if (!route.query.email || !route.query.confirmation) {
     possibleError.value = new Error('Missing query parameters')

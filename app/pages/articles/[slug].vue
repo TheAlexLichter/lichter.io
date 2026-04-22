@@ -14,6 +14,11 @@ const { data: surround } = await useAsyncData(`article-surround-${route.params.s
 const prev = computed(() => surround.value?.[0])
 const next = computed(() => surround.value?.[1])
 
+useSeoMeta({
+  title: article.value.title,
+  description: article.value.description,
+})
+
 useSchemaOrg([
   defineArticle({
     description: article.value.description,

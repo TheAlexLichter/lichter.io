@@ -25,6 +25,10 @@ const requestQuoteLink = computed(() => {
   return prefix + title + suffix
 })
 
+useSeoMeta({
+  title: workshop.value.title,
+})
+
 defineOgImageComponent('Workshop', {
   title: workshop.value.title,
   time: workshop.value.time,

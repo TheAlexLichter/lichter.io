@@ -50,6 +50,10 @@ function isTalkOrPodcast(entry?: { path?: string } | null): boolean {
   return Boolean(entry?.path?.startsWith('/speaking/'))
 }
 
+useSeoMeta({
+  title: page.value.title,
+})
+
 defineOgImageComponent('Speaking', {
   title: page.value.title,
   topics: page.value.topics,
