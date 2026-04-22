@@ -4,6 +4,7 @@ date: "2025-11-19"
 eventName: "c't <webdev>"
 eventUrl: "https://ct-webdev.com/agenda-2025/"
 location: "Cologne, Germany"
+slidesUrl: "https://github.com/TheAlexLichter/talk-js-tooling-ct-webdev-2025"
 type: "talk"
 language: "en"
 topics:

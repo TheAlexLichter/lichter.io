@@ -4,6 +4,7 @@ date: "2025-07-04"
 eventName: "Tech 'n' Drinks @ MYPOSTER"
 eventUrl: "https://inside.myposter.de/techndrinks-vom-framework-zur-toolchain/"
 location: "Munich, Germany"
+slidesUrl: "https://github.com/TheAlexLichter/talk-nuxt-4-and-modern-js-tooling-myposter-2025"
 type: "talk"
 language: "de"
 topics:

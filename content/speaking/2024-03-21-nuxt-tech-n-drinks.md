@@ -4,6 +4,7 @@ date: "2024-03-21"
 eventName: "Tech 'n' Drinks @ MYPOSTER"
 eventUrl: "https://inside.myposter.de/techndrinks-nuxt2024-server-components-nuxt4-alexanderlichter/"
 location: "Munich, Germany"
+slidesUrl: "https://github.com/TheAlexLichter/talk-nuxt-future-tech-n-drinks-2024"
 type: "talk"
 language: "de"
 topics:

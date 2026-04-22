@@ -5,6 +5,7 @@ eventName: "VueConf US"
 eventUrl: "https://2024.vueconf.us/"
 location: "New Orleans, LA, USA"
 videoUrl: "https://www.youtube.com/watch?v=LdbHmSKp-88"
+slidesUrl: "https://github.com/TheAlexLichter/talk-hydration-vueconf-us-2024"
 type: "talk"
 language: "en"
 topics:

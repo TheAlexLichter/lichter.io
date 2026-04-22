@@ -4,6 +4,7 @@ date: "2026-03-26"
 eventName: "AmsterdamJS"
 eventUrl: "https://www.meetup.com/amsterdamjs/"
 location: "Amsterdam, Netherlands"
+slidesUrl: "https://github.com/TheAlexLichter/talk-vite-plus-amsterdamjs-03-2026"
 type: "talk"
 language: "en"
 topics:

@@ -4,7 +4,7 @@ date: "2025-04-16"
 eventName: "vue-leipzig"
 eventUrl: "https://www.meetup.com/vue-js-meetup-leipzig/"
 location: "Leipzig, Germany"
-slidesUrl: "https://github.com/TheAlexLichter/talk-vue-future-vue-hamburg-2025"
+slidesUrl: "https://github.com/TheAlexLichter/talk-vue-future-vue-leipzig-2025"
 type: "talk"
 language: "en"
 topics:
