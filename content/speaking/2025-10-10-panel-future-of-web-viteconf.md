@@ -2,7 +2,7 @@
 title: "Panel: Future of the Web"
 date: "2025-10-10"
 eventName: "ViteConf"
-eventUrl: "https://viteconf.amsterdam/"
+eventUrl: "https://viteconf.amsterdam/program/"
 videoUrl: "https://www.youtube.com/watch?v=pAxALbm_qUg"
 location: "Amsterdam, Netherlands"
 type: "talk"

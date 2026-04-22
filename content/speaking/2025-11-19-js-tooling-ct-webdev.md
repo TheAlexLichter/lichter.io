@@ -2,7 +2,7 @@
 title: "Reinventing JavaScript Tooling - Is this the End of Rollup and ESLint?"
 date: "2025-11-19"
 eventName: "c't <webdev>"
-eventUrl: "https://ct-webdev.com/"
+eventUrl: "https://ct-webdev.com/agenda-2025/"
 location: "Cologne, Germany"
 type: "talk"
 language: "en"

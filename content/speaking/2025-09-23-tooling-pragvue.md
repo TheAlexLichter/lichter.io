@@ -2,7 +2,7 @@
 title: "Keynote: Modern JavaScript Tooling"
 date: "2025-09-23"
 eventName: "PragVue"
-eventUrl: "https://pragvue.com/"
+eventUrl: "https://pragvue.com/2025/"
 location: "Prague, Czech Republic"
 slidesUrl: "https://github.com/TheAlexLichter/talk-voidzero-modern-tooling-pragvue-25"
 type: "talk"

@@ -2,7 +2,7 @@
 title: "Panel: Vite Ecosystem & Q&A"
 date: "2025-10-09"
 eventName: "ViteConf"
-eventUrl: "https://viteconf.amsterdam/"
+eventUrl: "https://viteconf.amsterdam/program/"
 location: "Amsterdam, Netherlands"
 type: "talk"
 language: "en"

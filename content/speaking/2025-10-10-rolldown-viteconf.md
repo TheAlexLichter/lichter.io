@@ -2,7 +2,7 @@
 title: "Rolldown: How Vite Bundles at the Speed of Rust"
 date: "2025-10-10"
 eventName: "ViteConf"
-eventUrl: "https://viteconf.amsterdam/"
+eventUrl: "https://viteconf.amsterdam/program/"
 location: "Amsterdam, Netherlands"
 slidesUrl: "https://github.com/TheAlexLichter/talk-rolldown-viteconf-25"
 type: "talk"

@@ -2,7 +2,7 @@
 title: "From Framework to Toolchain: What is possible with Nuxt 4, Rolldown & Oxc"
 date: "2025-09-10"
 eventName: "Vue.js Paris"
-eventUrl: "https://www.meetup.com/vuejs-paris/"
+eventUrl: "https://www.meetup.com/vuejs-paris/events/310596794/"
 location: "Paris, France"
 type: "talk"
 language: "en"
