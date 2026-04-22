@@ -1,5 +1,0 @@
----
-title: 'Open Source'
-icon: ''
----
-

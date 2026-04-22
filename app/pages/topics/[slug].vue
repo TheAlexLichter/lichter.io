@@ -2,19 +2,18 @@
 const route = useRoute()
 const slug = route.params.slug as string
 
-const { data: page } = await useAsyncData(`topic-${slug}`, () => queryCollection('topics').path(`/topics/${slug}`).first())
+const { data: workshops } = await useAsyncData(`topic-workshops-${slug}`, () => queryCollection('workshops').where('topics', 'LIKE', `%${slug}%`).all())
 
-if (!page.value) {
+const { data: articles } = await useAsyncData(`topic-articles-${slug}`, () => queryCollection('articles').where('topics', 'LIKE', `%${slug}%`).order('dateModified', 'DESC').order('datePublished', 'DESC').all())
+
+const { data: talks } = await useAsyncData(`topic-speaking-${slug}`, () => queryCollection('speaking').where('topics', 'LIKE', `%${slug}%`).order('date', 'DESC').all())
+
+if (!workshops.value?.length && !articles.value?.length && !talks.value?.length) {
   throw createError({ statusCode: 404, fatal: true })
 }
 
-const { data: workshops } = useAsyncData(`topic-workshops-${slug}`, () => queryCollection('workshops').where('topics', 'LIKE', `%${slug}%`).all())
-
-const { data: articles } = useAsyncData(`topic-articles-${slug}`, () => queryCollection('articles').where('topics', 'LIKE', `%${slug}%`).order('dateModified', 'DESC').order('datePublished', 'DESC').all())
-
-const { data: talks } = useAsyncData(`topic-speaking-${slug}`, () => queryCollection('speaking').where('topics', 'LIKE', `%${slug}%`).order('date', 'DESC').all())
-
-const title = `Topic: ${page.value.title}`
+const topicName = topicTitle(slug)
+const title = `Topic: ${topicName}`
 const description = `Being it talks, workshops, panels, podcasts or blog posts, here you can find all my content sorted by topic.`
 
 useSeoMeta({
@@ -30,7 +29,7 @@ defineOgImageComponent('Speaking')
       <AppLinkBack to="/topics/">To topic selection</AppLinkBack>
       <ParagraphDecoration class="mt-4" />
       <AppParagraph class="mt-4" look="heading" tag="h1">
-        Topic: {{ page!.title }}
+        Topic: {{ topicName }}
       </AppParagraph>
     </AppSection>
     <AppSection class="justify-center pb-8">

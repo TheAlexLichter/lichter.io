@@ -1,5 +1,0 @@
----
-title: 'Composition API'
-icon: ''
----
-

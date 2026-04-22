@@ -9,7 +9,33 @@ useSeoMeta({
 
 defineOgImageComponent('Speaking')
 
-const { data: topics } = useAsyncData('all-topics', () => queryCollection('topics').select('title', 'path').all())
+const { data: topics } = await useAsyncData('all-topics', async () => {
+  const [articles, speaking, workshops] = await Promise.all([
+    queryCollection('articles').select('topics').all(),
+    queryCollection('speaking').select('topics').all(),
+    queryCollection('workshops').select('topics').all(),
+  ])
+
+  const counts = new Map<string, number>()
+  for (const entry of [...articles, ...speaking, ...workshops]) {
+    for (const slug of entry.topics ?? []) {
+      counts.set(slug, (counts.get(slug) ?? 0) + 1)
+    }
+  }
+
+  const maxCount = Math.max(...counts.values(), 1)
+
+  return [...counts.entries()]
+    .map(([slug, count]) => ({
+      path: `/topics/${slug}`,
+      title: topicTitle(slug),
+      count,
+      size: maxCount > 1
+        ? Math.min(3, Math.floor((Math.log(count) / Math.log(maxCount)) * 4))
+        : 1,
+    }))
+    .sort((a, b) => b.count - a.count || a.title.localeCompare(b.title))
+})
 </script>
 
 <template>
@@ -20,8 +46,8 @@ const { data: topics } = useAsyncData('all-topics', () => queryCollection('topic
       Below you can find a list of my talks, podcast appearances, given workshops and panels. All, sorted by topics that
       might interest you.
     </AppParagraph>
-    <div class="flex flex-wrap gap-8 mt-8">
-      <TopicPreview v-for="topic in topics" :key="topic.path" :topic="{ path: topic.path, title: topic.title }" />
+    <div class="flex flex-wrap items-center gap-8 mt-8">
+      <TopicPreview v-for="topic in topics" :key="topic.path" :topic="topic" />
     </div>
   </AppSection>
 </template>

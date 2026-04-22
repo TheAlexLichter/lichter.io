@@ -1,5 +1,0 @@
----
-title: 'New Work'
-icon: ''
----
-

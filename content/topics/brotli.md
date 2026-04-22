@@ -1,5 +1,0 @@
----
-title: 'Brotli Compression'
-icon: ''
----
-

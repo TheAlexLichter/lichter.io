@@ -1,5 +1,0 @@
----
-title: 'Functional Programming'
-icon: ''
----
-

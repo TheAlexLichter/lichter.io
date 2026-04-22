@@ -1,5 +1,0 @@
----
-title: 'Nuxt.js'
-icon: ''
----
-

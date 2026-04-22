@@ -1,5 +1,0 @@
----
-title: 'Jamstack'
-icon: ''
----
-

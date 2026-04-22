@@ -1,5 +1,0 @@
----
-title: 'Text Compression'
-icon: ''
----
-

@@ -44,13 +44,5 @@ export default defineContentConfig({
         onStartPage: z.boolean().optional(),
       }),
     }),
-    topics: defineCollection({
-      type: 'page',
-      source: 'topics/*.md',
-      schema: z.object({
-        title: z.string(),
-        icon: z.string().optional(),
-      }),
-    }),
   },
 })
