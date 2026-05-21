@@ -6,9 +6,10 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "dev": "nuxt dev",
-    "build": "nuxt build",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
+    "dev": "vp run nuxt:dev",
+    "build": "vp run nuxt:build",
+    "generate": "vp run nuxt:generate",
+    "lint": "vp check --no-fmt"
   },
   "devDependencies": {
     "@headlessui/vue": "^1.7.23",
@@ -36,7 +37,8 @@
     "nuxt": "^4.4.2",
     "remark-reading-time": "^2.1.0",
     "tailwindcss": "^4.2.2",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vite-plus": "catalog:"
   },
   "packageManager": "pnpm@9.15.4",
   "dependencies": {

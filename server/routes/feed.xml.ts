@@ -1,4 +1,4 @@
-import { appendHeader } from 'h3'
+import { appendHeader, defineEventHandler } from 'h3'
 import { generateBlogFeed } from '../utils/feed.js'
 
 export default defineEventHandler(async (event) => {

@@ -87,7 +87,7 @@ function useSiteNotifications() {
     onUserSpeaksGerman()
   })
 
-  function onDicsordRef(): Boolean {
+  function onDicsordRef(): boolean {
     const isDicsordDomain = route.query?.ref === 'dicsord.com'
     if (!isDicsordDomain) {
       return false
@@ -104,7 +104,7 @@ function useSiteNotifications() {
     return true
   }
 
-  function onUserSpeaksGerman(): Boolean {
+  function onUserSpeaksGerman(): boolean {
     const doesSpeakGerman = navigator.languages.some(lang => lang.startsWith('de'))
     if (!doesSpeakGerman) {
       return false

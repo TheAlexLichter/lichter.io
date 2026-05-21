@@ -4,7 +4,11 @@ export function useNotifications() {
   const notifications = useState<AppNotification[]>('notifications', () => [])
   const removeNotification = (id: string) => {
     const notificationIndex = notifications.value.findIndex((n) => n.id === id)
-    const notification = notifications.value[notificationIndex]
+    if (notificationIndex === -1) {
+      return
+    }
+
+    const notification = notifications.value[notificationIndex]!
     notification.onRemove?.()
     notifications.value.splice(notificationIndex, 1)
   }
