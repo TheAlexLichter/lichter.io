@@ -26,17 +26,17 @@ Speaking of open source…
 
 I started using Nuxt already back in December 2017 when I decided to rebuild my [personal page](https://lichter.io) with it. However, the relation between Nuxt.js (the framework _and_ the team) and me really evolved in 2018. With small steps, like showcasing my page and creating some bug reports in the first months, I was able to make first contributions to the Nuxt.js ecosystem in march. For example to:
 
-* the Nuxt [PWA Module](https://github.com/nuxt-community/pwa-module)
-* to my favorite CSS Framework, TailwindCSS to [make it usable with Nuxt](https://github.com/tailwindcss/tailwindcss/pull/402),
-* [vue-meta](https://github.com/declandewet/vue-meta) (used by Nuxt.js for the head tag management)
-* the (now somewhat neglected) [auth module](https://github.com/nuxt-community/auth-module)
-* and several more…
+- the Nuxt [PWA Module](https://github.com/nuxt-community/pwa-module)
+- to my favorite CSS Framework, TailwindCSS to [make it usable with Nuxt](https://github.com/tailwindcss/tailwindcss/pull/402),
+- [vue-meta](https://github.com/declandewet/vue-meta) (used by Nuxt.js for the head tag management)
+- the (now somewhat neglected) [auth module](https://github.com/nuxt-community/auth-module)
+- and several more…
 
 This was followed by an invite to the Nuxt Community GitHub organization and the Nuxt.js Slack (PS: we use Discord now!). I really felt honored and had the chance to contribute even more, which I did. In April, I released my first two nuxt modules for [redirects](https://github.com/nuxt-community/redirect-module) and [RSS/ATOM/JSON feeds](https://github.com/nuxt-community/feed-module) (out of 8 modules this year). Both are still maintained mainly by me and have over 10k total downloads _each_. I’ve also created my first open-source Vue components:
 
-* [vue-if-bot](https://github.com/Developmint/vue-if-bot) to show or hide sth. for crawlers (useful to hide cookie banners)
-* [vue-link](https://github.com/Developmint/vue-link) for unifying external and internal links
-* [vue-next-level-scroll](https://github.com/Developmint/vue-next-level-scroll) for the best scroll experience
+- [vue-if-bot](https://github.com/Developmint/vue-if-bot) to show or hide sth. for crawlers (useful to hide cookie banners)
+- [vue-link](https://github.com/Developmint/vue-link) for unifying external and internal links
+- [vue-next-level-scroll](https://github.com/Developmint/vue-next-level-scroll) for the best scroll experience
 
 These components haven’t been adopted in large scale but that’s fine. I’ve created them to abstract logic that I had to use in a hand full of projects. Because nobody likes to copy and paste component code over and over again.
 
@@ -92,10 +92,10 @@ There is also [Brotli.Pro](https://brotli.pro/) which is still in testing phase 
 
 Wow! This post is now way longer than expected. Okay, quick: Here are my goals:
 
-* **Blogging more frequently** (Blogging has become one of my favorite tasks. I like writing more and more and there are still so many things to write about)
-* Keeping up the **gym routine throughout the year** (I don’t want to get too lazy again, especially when I’m back in Germany)
-* Improve my **organization** - More lists, written stuff, timeboxing!
-* Look into **Elixir** (I like functional programming and Elixir looks quite nice. Why not trying it out?)
-* Complete another **awesome Hacktoberfest** (This year I opened 56 PRs in October and 54 were merged. I want to keep that up)
+- **Blogging more frequently** (Blogging has become one of my favorite tasks. I like writing more and more and there are still so many things to write about)
+- Keeping up the **gym routine throughout the year** (I don’t want to get too lazy again, especially when I’m back in Germany)
+- Improve my **organization** - More lists, written stuff, timeboxing!
+- Look into **Elixir** (I like functional programming and Elixir looks quite nice. Why not trying it out?)
+- Complete another **awesome Hacktoberfest** (This year I opened 56 PRs in October and 54 were merged. I want to keep that up)
 
 That’s it, folks! Thanks for reading and a happy 2019 with a lot of success to you!

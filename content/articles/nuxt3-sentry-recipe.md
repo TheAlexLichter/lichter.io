@@ -10,7 +10,7 @@ topics:
   - composition-api
 ---
 
-Lots of people ask for certain Nuxt 3 compatible modules. Besides authentication, the most popular question revolves around the Sentry integration. A few weeks ago, [I announced working on a port for the Nuxt 2 module](https://github.com/nuxt-community/sentry-module/issues/619#issuecomment-1713847941) - but this might take a little. In this article, I want to explain *why* it takes longer than writing an average module and also want to give you a simple [example recipe](#integrating-sentry-into-a-project) for your own Nuxt 3 project, so you don't have to wait for the module.
+Lots of people ask for certain Nuxt 3 compatible modules. Besides authentication, the most popular question revolves around the Sentry integration. A few weeks ago, [I announced working on a port for the Nuxt 2 module](https://github.com/nuxt-community/sentry-module/issues/619#issuecomment-1713847941) - but this might take a little. In this article, I want to explain _why_ it takes longer than writing an average module and also want to give you a simple [example recipe](#integrating-sentry-into-a-project) for your own Nuxt 3 project, so you don't have to wait for the module.
 
 :toc
 
@@ -24,7 +24,7 @@ And then it comes to configuration...
 
 I personally am a big advocate of convention over configuration, but sometimes you just can't get around it. If you want to make your solution flexible enough, you have to provide a way to configure it. The options should be straightforward and easy to use, ideally aligning with the mental model of potential users already. You want to find the sweet spot between too many and too few options.
 
-Frankly, this is a common struggle for module authors! Fellow Nuxt contributor [Julien Huang](https://github.com/huang-julien/) (did I hear someone saying *server components*?) also shares similar experiences:
+Frankly, this is a common struggle for module authors! Fellow Nuxt contributor [Julien Huang](https://github.com/huang-julien/) (did I hear someone saying _server components_?) also shares similar experiences:
 
 > While developing the Nuxt Application Insights module, I had to split what I created as my own implementation into a Nitro package (nitro-applicationinsights) first and am now working on creating a Nuxt module.
 >
@@ -36,7 +36,7 @@ Frankly, this is a common struggle for module authors! Fellow Nuxt contributor [
 
 In the case of the Sentry module, [Rafał](https://github.com/rchl), the author and maintainer of the Nuxt 2 module did a great job and laid out a solid foundation - but this also adds another part of complexity: Which features and settings should be ported to the Nuxt 3 module? Which features and settings should be dropped, and what should added? And how to adapt the existing set of features to make it work seamlessly with the Composition API or Nitro, Nuxt's server engine?
 
-I am afraid I can't answer these questions yet - but I am working on it. While being committed to finding the best possible solution, it will take some time. But just because the module needs a bit more time to become Nuxt 3 compatible, this doesn't mean *you* have to wait.
+I am afraid I can't answer these questions yet - but I am working on it. While being committed to finding the best possible solution, it will take some time. But just because the module needs a bit more time to become Nuxt 3 compatible, this doesn't mean _you_ have to wait.
 
 ### Own your implementation
 
@@ -67,27 +67,27 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       sentry: {
-        dsn: '',
-        environment: 'development',
-      }
-    }
-  }
-})
+        dsn: "",
+        environment: "development",
+      },
+    },
+  },
+});
 ```
 
 As mentioned before, various other configuration options can be part of your `runtimeConfig` depending on your needs.
 The best part is that we can now use environment variables to override the settings for different deploy:
 
-* `NUXT_PUBLIC_SENTRY_DSN` to set up Sentry's DSN
-* `NUXT_PUBLIC_SENTRY_ENVIRONMENT` to set up the correct environment tag
-* And whichever config options you want to add
+- `NUXT_PUBLIC_SENTRY_DSN` to set up Sentry's DSN
+- `NUXT_PUBLIC_SENTRY_ENVIRONMENT` to set up the correct environment tag
+- And whichever config options you want to add
 
 Alright, we are good to go for starting with the server-side implementation!
 
 ### Nitro integration - Sentry on the server side
 
 When I originally started implementing the Nitro part of the Sentry integration, it was... tricky, to say the least.
-But since Nitro v2.6, things got *way* easier thanks to the new hooks! We will use three of them straight away.
+But since Nitro v2.6, things got _way_ easier thanks to the new hooks! We will use three of them straight away.
 Also, this guide will work for a pure Nitro server too! Just skip the Nuxt-specific parts (e.g. ignore the `server/` folder prefix) and you are good to go. Because Nitro also supports the runtime config and is the server engine for Nuxt 3, it will be really easy to adapt the code.
 
 Before we start with using Nitro though, we need to install the dependencies, namely Sentry's node package and the profiling integration (if desired). This can be done via `pnpm i -D @sentry/node @sentry/profiling-node`. Feel free to switch out the package manager to whatever you use.
@@ -95,16 +95,18 @@ Before we start with using Nitro though, we need to install the dependencies, na
 After we do this, we will create a new Nitro plugin. In there, we want to initialize Sentry and set up the profiling integration. We will also retrieve our variables from the runtime config and set up the nitro hook:
 
 ```ts [server/plugins/sentry.ts]
-import * as Sentry from '@sentry/node'
-import { nodeProfilingIntegration } from '@sentry/profiling-node'
+import * as Sentry from "@sentry/node";
+import { nodeProfilingIntegration } from "@sentry/profiling-node";
 
 export default defineNitroPlugin((nitroApp) => {
-  const { public: { sentry } } = useRuntimeConfig()
+  const {
+    public: { sentry },
+  } = useRuntimeConfig();
 
   // If no sentry DSN set, ignore and warn in the console
   if (!sentry.dsn) {
-    console.warn('Sentry DSN not set, skipping Sentry initialization')
-    return
+    console.warn("Sentry DSN not set, skipping Sentry initialization");
+    return;
   }
 
   // Initialize Sentry
@@ -115,11 +117,11 @@ export default defineNitroPlugin((nitroApp) => {
     // Performance Monitoring
     tracesSampleRate: 1.0, // Change in production!
     // Set sampling rate for profiling - this is relative to tracesSampleRate
-    profilesSampleRate: 1.0 // Change in production!
-  })
+    profilesSampleRate: 1.0, // Change in production!
+  });
 
   // Here comes the hooks
-})
+});
 ```
 
 So far so good, we set up the configuration. As mentioned before, lots of things can be added to the `runtimeConfig`, such as the sample rates. We could also switch them based on `sentry.environment` though. And now let's jump into how to use the hooks.
@@ -130,49 +132,49 @@ First, we want to ensure that Sentry will be capturing all kinds of errors Nitro
 
 ```ts [server/plugins/sentry.ts]
 // Inside the plugin, after initializing sentry
-nitroApp.hooks.hook('error', (error) => {
-  Sentry.captureException(error)
-})
+nitroApp.hooks.hook("error", (error) => {
+  Sentry.captureException(error);
+});
 ```
 
 Now, **all errors** will be captured. You might not want to capture some of these, e.g. 404s or 422s, as they are usually not relevant for error tracking. This can be done with a bit of custom logic - by checking if the error is an H3Error, and if so, if the status code is one of the exceptions we don't want to track:
 
 ```ts [server/plugins/sentry.ts]
 // On the top of the file, import H3Error!
-import { H3Error } from 'h3'
+import { H3Error } from "h3";
 
 // Inside the plugin, after initializing sentry
-nitroApp.hooks.hook('error', (error) => {
+nitroApp.hooks.hook("error", (error) => {
   // Do not handle 404s and 422s
   if (error instanceof H3Error) {
     if (error.statusCode === 404 || error.statusCode === 422) {
-      return
+      return;
     }
   }
 
-  Sentry.captureException(error)
-})
+  Sentry.captureException(error);
+});
 ```
 
 #### Sharing Sentry with the event context
 
-After the initial setup is done, we also want to ensure that we can use Sentry in our API routes, e.g. to attach a user, send messages, and whatever your use case is. The best way is attaching Sentry to the event context, so we can access it from any event handler. We can do this *for every request* by using the `request` hook! This hook will be called for every request, so we can attach Sentry to the event context in just four (soon three) lines.
+After the initial setup is done, we also want to ensure that we can use Sentry in our API routes, e.g. to attach a user, send messages, and whatever your use case is. The best way is attaching Sentry to the event context, so we can access it from any event handler. We can do this _for every request_ by using the `request` hook! This hook will be called for every request, so we can attach Sentry to the event context in just four (soon three) lines.
 There is a type issue in Nitro at the time of writing, but I'm confident it won't stay for long. Until then, we need to use a `@ts-ignore`, or better `@ts-expect-error` with a comment!
 
 ```ts [server/plugins/sentry.ts]
-nitroApp.hooks.hook('request', (event) => {
-  event.context.$sentry = Sentry
-})
+nitroApp.hooks.hook("request", (event) => {
+  event.context.$sentry = Sentry;
+});
 ```
 
 Okay, we are not **fully done yet** if we use TypeScript because the event context doesn't know about the `$sentry` property yet. We can fix this by augmenting the EventContext type in a `.d.ts` file in your project root:
 
 ```ts [env.d.ts]
-import type { Sentry } from '@sentry/node'
+import type { Sentry } from "@sentry/node";
 
-declare module 'h3' {
+declare module "h3" {
   interface H3EventContext {
-    $sentry?: Sentry
+    $sentry?: Sentry;
   }
 }
 ```
@@ -183,13 +185,15 @@ Now we can do something like this in any event handler:
 
 ```ts [server/api/my-api-endpoints.ts]
 export default defineApiHandler(async (event) => {
-  const sentry = event.context.$sentry
-  if(sentry) {
+  const sentry = event.context.$sentry;
+  if (sentry) {
     // Do something with Sentry if exists
-    // e.g. 
-    sentry.setUser({/*...*/})
+    // e.g.
+    sentry.setUser({
+      /*...*/
+    });
   }
-})
+});
 ```
 
 #### Closing Sentry on shutdown
@@ -198,9 +202,9 @@ An often forgotten task is cleaning up! We want to ensure that Sentry is gracefu
 We can achieve this by using the `close` hook:
 
 ```ts [server/plugins/sentry.ts]
-nitroApp.hooks.hookOnce('close', async () => {
-  await Sentry.close(2000)
-})
+nitroApp.hooks.hookOnce("close", async () => {
+  await Sentry.close(2000);
+});
 ```
 
 And that's it! Our nitro integration is ready. Now, up to the client side.
@@ -214,14 +218,16 @@ Let's not forget to add the Sentry vue plugin to our dependencies before via `pn
 Then, we provide the vue app via `nuxtApp.vueApp` and the router via the `useRouter()` composable. Also, we use the `dsn` and `environment` keys through the `useRuntimeConfig` composable.
 
 ```ts [plugins/sentry.client.ts]
-import * as Sentry from '@sentry/vue'
+import * as Sentry from "@sentry/vue";
 
 export default defineNuxtPlugin((nuxtApp) => {
-  const router = useRouter()
-  const { public: { sentry } } = useRuntimeConfig()
+  const router = useRouter();
+  const {
+    public: { sentry },
+  } = useRuntimeConfig();
 
   if (!sentry.dsn) {
-    return
+    return;
   }
 
   Sentry.init({
@@ -229,7 +235,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     dsn: sentry.dsn,
     environment: sentry.environment,
     integrations: [
-      Sentry.browserTracingIntegration({ router }), 
+      Sentry.browserTracingIntegration({ router }),
       Sentry.replayIntegration({
         maskAllText: false,
         blockAllMedia: false,
@@ -241,12 +247,12 @@ export default defineNuxtPlugin((nuxtApp) => {
     tracesSampleRate: 0.2, // Change in prod
 
     // Set `tracePropagationTargets` to control for which URLs distributed tracing should be enabled
-    tracePropagationTargets: ['localhost', 'https://your-server.com'],
+    tracePropagationTargets: ["localhost", "https://your-server.com"],
 
     replaysSessionSampleRate: 1.0, // Change in prod
     replaysOnErrorSampleRate: 1.0, // Change in prod if necessary
-  })
-})
+  });
+});
 ```
 
 From here, error tracking works out of the box. Of course, you can build your own composable exposing `Sentry` helpers or import it in the components as needed - but that's up to you now as you own the implementation!

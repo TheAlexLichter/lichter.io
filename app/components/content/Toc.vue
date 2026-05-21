@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const toc = inject<Ref<{ links: any[] } | undefined>>('content-toc')
+const toc = inject<Ref<{ links: any[] } | undefined>>("content-toc");
 </script>
 
 <template>

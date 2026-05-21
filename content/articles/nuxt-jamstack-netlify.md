@@ -10,7 +10,6 @@ topics:
   - cloudflare
 ---
 
-
 In the last month, I gradually migrated several projects from server-rendered Nuxt.js applications to statically generated websites, powered by Nuxt.js too, as already hinted in my [previous article](/articles/nuxt-with-an-api/).
 
 It all started with my [portfolio](https://lichter.io/) which consists of one larger page and two pages for privacy and legal notice. All three pages have actually no dynamic data involved (as you can see in the source code). The text, the images and everything else are completely hardcoded. Last year, the page was served from one of my Virtual Private Servers (VPS) by always running Node.js server. The only purpose of it was to respond with the same content again and again.

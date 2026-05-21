@@ -1,82 +1,95 @@
 <script setup lang="ts">
-const route = useRoute()
+const route = useRoute();
 
-const { data: article } = await useAsyncData(`article-${route.params.slug}`, () => queryCollection('articles').path(`/articles/${route.params.slug}`).first())
+const { data: article } = await useAsyncData(`article-${route.params.slug}`, () =>
+  queryCollection("articles").path(`/articles/${route.params.slug}`).first(),
+);
 
 if (!article.value) {
-  throw createError({ statusCode: 404, fatal: true })
+  throw createError({ statusCode: 404, fatal: true });
 }
 
-provide('content-toc', computed(() => article.value?.body?.toc))
+provide(
+  "content-toc",
+  computed(() => article.value?.body?.toc),
+);
 
-const { data: surround } = await useAsyncData(`article-surround-${route.params.slug}`, () => queryCollectionItemSurroundings('articles', `/articles/${route.params.slug}`, { fields: ['title', 'path', 'description', 'datePublished', 'dateModified', 'topics'] }))
+const { data: surround } = await useAsyncData(`article-surround-${route.params.slug}`, () =>
+  queryCollectionItemSurroundings("articles", `/articles/${route.params.slug}`, {
+    fields: ["title", "path", "description", "datePublished", "dateModified", "topics"],
+  }),
+);
 
-const prev = computed(() => surround.value?.[0])
-const next = computed(() => surround.value?.[1])
+const prev = computed(() => surround.value?.[0]);
+const next = computed(() => surround.value?.[1]);
 
 useSeoMeta({
   title: article.value.title,
   description: article.value.description,
-})
+});
 
 useSchemaOrg([
   defineArticle({
     description: article.value.description,
     datePublished: article.value.datePublished,
     dateModified: article.value.dateModified,
-  })
-])
+  }),
+]);
 
 const isOlderThanOneYear = computed(() => {
-  const dateModified = new Date(article.value!.dateModified)
+  const dateModified = new Date(article.value!.dateModified);
 
-  const oneYearAgo = new Date()
-  oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1)
+  const oneYearAgo = new Date();
+  oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
 
-  return dateModified < oneYearAgo
-})
+  return dateModified < oneYearAgo;
+});
 
-const formattedUpdateAt = computed(() => formatDateStringToHumanReadable(article.value!.dateModified))
-const formattedCreatedAt = computed(() => formatDateStringToHumanReadable(article.value!.datePublished))
+const formattedUpdateAt = computed(() =>
+  formatDateStringToHumanReadable(article.value!.dateModified),
+);
+const formattedCreatedAt = computed(() =>
+  formatDateStringToHumanReadable(article.value!.datePublished),
+);
 
-const linkToCurrentPage = withSiteUrl(route.path)
+const linkToCurrentPage = withSiteUrl(route.path);
 
 const links = computed(() => {
-  const rawShareOnTwitter = `https://twitter.com/intent/tweet?text=I just read "${article.value!.title}". Check it out!&url=${linkToCurrentPage.value}&via=TheAlexLichter`
-  const shareOnTwitter = encodeURI(rawShareOnTwitter.replace(/#/g, 'No. '))
+  const rawShareOnTwitter = `https://twitter.com/intent/tweet?text=I just read "${article.value!.title}". Check it out!&url=${linkToCurrentPage.value}&via=TheAlexLichter`;
+  const shareOnTwitter = encodeURI(rawShareOnTwitter.replace(/#/g, "No. "));
 
-  const rawDiscussOnTwitter = `https://twitter.com/search?q=${linkToCurrentPage.value}`
+  const rawDiscussOnTwitter = `https://twitter.com/search?q=${linkToCurrentPage.value}`;
 
-  const editOnGitHub = `https://github.com/manniL/lichter.io/edit/main/content/${article.value!.stem}${article.value!.extension}`
+  const editOnGitHub = `https://github.com/manniL/lichter.io/edit/main/content/${article.value!.stem}${article.value!.extension}`;
   return {
     shareOnTwitter,
     discussOnTwitter: encodeURI(rawDiscussOnTwitter),
-    editOnGitHub
-  }
-})
+    editOnGitHub,
+  };
+});
 
-const { addNotification } = useNotifications()
+const { addNotification } = useNotifications();
 async function copyLinkToClipboard(): Promise<void> {
   await navigator.clipboard.writeText(linkToCurrentPage.value);
   addNotification({
-    heading: 'Link copied to clipboard',
-    body: 'You can now paste the link anywhere you want.',
-    iconName: 'heroicons:check-badge',
-    iconClass: 'text-green-500',
+    heading: "Link copied to clipboard",
+    body: "You can now paste the link anywhere you want.",
+    iconName: "heroicons:check-badge",
+    iconClass: "text-green-500",
     durationInMs: 2000,
-  })
+  });
 }
 
 function isArticle(entry?: { path?: string } | null): boolean {
-  return Boolean(entry?.path?.startsWith('/articles/'))
+  return Boolean(entry?.path?.startsWith("/articles/"));
 }
 
-defineOgImageComponent('Article', {
+defineOgImageComponent("Article", {
   title: article.value.title,
   topics: article.value.topics,
   readingTime: article.value.readingTime?.text,
-  datePublished: formattedUpdateAt.value
-})
+  datePublished: formattedUpdateAt.value,
+});
 </script>
 <template>
   <div>
@@ -101,53 +114,73 @@ defineOgImageComponent('Article', {
     <AppSection class="justify-center bg-zinc-900 pb-8">
       <div>
         <ArticleAgeWarning v-if="isOlderThanOneYear" />
-        <ContentRenderer class="prose md:prose-lg lg:prose-xl" :class="isOlderThanOneYear ? 'pt-8' : 'pt-4'" :value="article!" />
+        <ContentRenderer
+          class="prose md:prose-lg lg:prose-xl"
+          :class="isOlderThanOneYear ? 'pt-8' : 'pt-4'"
+          :value="article!"
+        />
       </div>
       <div class="mt-16 md:mt-32">
         <div class="flex flex-col md:flex-row justify-between items-center gap-y-2 md:gap-0 mt-2">
           <div class="order-1">
             <AppLink
               class="text-red-400 underline decoration-red-400/30 font-semibold transition-all duration-150 hover:decoration-red-400 inline-block"
-              :to="links.shareOnTwitter">
+              :to="links.shareOnTwitter"
+            >
               Tweet this article
-            </AppLink> &bull;
+            </AppLink>
+            &bull;
             <button
               class="text-red-400 underline decoration-red-400/30 font-semibold transition-all duration-150 hover:decoration-red-400 inline-block"
-              @click="copyLinkToClipboard">
+              @click="copyLinkToClipboard"
+            >
               Copy link
             </button>
           </div>
-          <p v-if="article!.datePublished !== article!.dateModified"
-            class="order-4 md:order-2 text-sm md:inline text-zinc-300">
+          <p
+            v-if="article!.datePublished !== article!.dateModified"
+            class="order-4 md:order-2 text-sm md:inline text-zinc-300"
+          >
             Originally published at {{ formattedCreatedAt }}
           </p>
           <div class="order-3">
             <AppLink
               class="text-red-400 underline decoration-red-400/30 font-semibold transition-all duration-150 hover:decoration-red-400 inline-block"
-              :to="links.discussOnTwitter">
+              :to="links.discussOnTwitter"
+            >
               Discuss on <span class="line-through">Twitter</span> X
-            </AppLink> &bull;
+            </AppLink>
+            &bull;
             <AppLink
               class="text-red-400 underline decoration-red-400/30 font-semibold transition-all duration-150 hover:decoration-red-400 inline-block"
-              :to="links.editOnGitHub">
+              :to="links.editOnGitHub"
+            >
               Edit on GitHub
             </AppLink>
           </div>
         </div>
       </div>
       <div
-        class="flex flex-col md:flex-row gap-8 justify-center md:justify-start items-center mt-4 pt-8 md:pt-16 border-t border-t-gray-500/50">
+        class="flex flex-col md:flex-row gap-8 justify-center md:justify-start items-center mt-4 pt-8 md:pt-16 border-t border-t-gray-500/50"
+      >
         <div class="shrink-0">
-          <img class="rounded-full mx-auto" width="192" height="192" src="/img/me@2x.jpg"
-            alt="Photo of Alexander Lichter">
+          <img
+            class="rounded-full mx-auto"
+            width="192"
+            height="192"
+            src="/img/me@2x.jpg"
+            alt="Photo of Alexander Lichter"
+          />
         </div>
         <div class="col-span-4 text-center md:text-left">
           <h4 class="font-medium text-lg">Written by Alexander Lichter</h4>
           <p class="max-w-xl text-lg mt-4 text-gray-400">
-            I'm Alex, a German <b>web engineering consultant</b> and content creator.
-            Helping companies with my experience in TypeScript, Vue.js, and Nuxt.js is my daily business.
+            I'm Alex, a German <b>web engineering consultant</b> and content creator. Helping
+            companies with my experience in TypeScript, Vue.js, and Nuxt.js is my daily business.
           </p>
-          <AppLink to="/about/" class="underline hover:no-underline mt-2 inline-block">More about me</AppLink>
+          <AppLink to="/about/" class="underline hover:no-underline mt-2 inline-block"
+            >More about me</AppLink
+          >
         </div>
       </div>
     </AppSection>

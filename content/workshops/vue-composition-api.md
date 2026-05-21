@@ -18,30 +18,30 @@ After this workshop, you will have a solid understanding of the Composition API.
 
 ## Agenda
 
-* Introduction
-  * What is the Composition API?
-  * Why was it created?
-  * What problems does the Options API have?
-* Key Concepts
-  * Anatomy of the composition API
-  * `setup()`
-  * `<script setup>`
-* Reactivity
-  * Comparison to Options API
-  * `ref` vs. `reactive`
-* Further features
-  * Lifecycle Hooks
-  * Watching properties
-  * Computed properties
-* Composables
-  * Creating your own composables
-  * VueUse
-  * State management
-* Best practices
-  * Naming conventions
-  * TypeScript and the Composition API
-  * Migration strategies
-  * When to use CAPI vs. OAPI?
+- Introduction
+  - What is the Composition API?
+  - Why was it created?
+  - What problems does the Options API have?
+- Key Concepts
+  - Anatomy of the composition API
+  - `setup()`
+  - `<script setup>`
+- Reactivity
+  - Comparison to Options API
+  - `ref` vs. `reactive`
+- Further features
+  - Lifecycle Hooks
+  - Watching properties
+  - Computed properties
+- Composables
+  - Creating your own composables
+  - VueUse
+  - State management
+- Best practices
+  - Naming conventions
+  - TypeScript and the Composition API
+  - Migration strategies
+  - When to use CAPI vs. OAPI?
 
 ## Target audience and requirements
 

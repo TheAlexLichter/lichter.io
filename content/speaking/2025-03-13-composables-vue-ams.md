@@ -13,6 +13,6 @@ topics:
   - composables
 ---
 
-Who of you writes composables? And - more importantly - who of you writes *good* composables?
+Who of you writes composables? And - more importantly - who of you writes _good_ composables?
 
 The Composition API makes it tempting to wrap everything into a `useSomething()` function, but not every composable is a well-designed one. In this Vue.js Amsterdam 2025 talk, I turned the patterns, pitfalls and principles I use in consulting engagements into a compact "composable handbook" - a set of guidelines to help you design composables that are reusable, testable and pleasant to work with.

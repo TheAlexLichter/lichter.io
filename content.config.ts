@@ -1,10 +1,10 @@
-import { defineCollection, defineContentConfig, z } from '@nuxt/content'
+import { defineCollection, defineContentConfig, z } from "@nuxt/content";
 
 export default defineContentConfig({
   collections: {
     articles: defineCollection({
-      type: 'page',
-      source: 'articles/*.md',
+      type: "page",
+      source: "articles/*.md",
       schema: z.object({
         title: z.string(),
         dateModified: z.string(),
@@ -16,8 +16,8 @@ export default defineContentConfig({
       }),
     }),
     speaking: defineCollection({
-      type: 'page',
-      source: 'speaking/*.md',
+      type: "page",
+      source: "speaking/*.md",
       schema: z.object({
         title: z.string(),
         date: z.string().optional(),
@@ -27,14 +27,14 @@ export default defineContentConfig({
         slidesUrl: z.string().optional(),
         videoUrl: z.string().optional(),
         podcastUrl: z.string().optional(),
-        type: z.enum(['talk', 'podcast']).default('talk'),
+        type: z.enum(["talk", "podcast"]).default("talk"),
         language: z.string().optional(),
         topics: z.array(z.string()).default([]),
       }),
     }),
     workshops: defineCollection({
-      type: 'page',
-      source: 'workshops/*.md',
+      type: "page",
+      source: "workshops/*.md",
       schema: z.object({
         title: z.string(),
         time: z.string().optional(),
@@ -45,4 +45,4 @@ export default defineContentConfig({
       }),
     }),
   },
-})
+});

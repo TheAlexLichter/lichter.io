@@ -14,39 +14,39 @@ During this workshop, we will cover the basics of Vue 3 and learn how to develop
 
 ## Agenda
 
-* Introduction to Vue.js and its core concepts.
-  * What is Vue.js and why is it used?
-  * Installing and setting up a Vue project
-* Component-based development
-  * Creating and using Vue components
-  * State and properties in components
-* Data binding and display
-  * Understanding two-way data binding
-  * Using mustache syntax and directives
-* Event handling
-  * Responding to user interactions
-  * Dispatching custom events
-  * Handling form inputs
-* Composition API and reactivity
-  * Introduction to the Composition API
-  * Understanding reactive updates
-  * Building own composables
-* Routing with Vue Router
-  * Creating multi-page applications with Vue Router
-  * Configuring Routes and Navigation
-* State Management with Pinia or composables
-  * Introduction to state management
-  * Using Pinia stores to manage global state
-  * Exemplary usage of composables for state management
-* Slots
-  * Understanding slots and their usage
-  * Using named slots
-  * Sneak peek into Scoped slots
-* Vue and TypeScript
-  * Using TypeScript in the `script` part of the components
-  * Type-Checking with `vue-tsc`
-* Bonus: Nuxt.js
-  * Discovering benefits of the meta framework
+- Introduction to Vue.js and its core concepts.
+  - What is Vue.js and why is it used?
+  - Installing and setting up a Vue project
+- Component-based development
+  - Creating and using Vue components
+  - State and properties in components
+- Data binding and display
+  - Understanding two-way data binding
+  - Using mustache syntax and directives
+- Event handling
+  - Responding to user interactions
+  - Dispatching custom events
+  - Handling form inputs
+- Composition API and reactivity
+  - Introduction to the Composition API
+  - Understanding reactive updates
+  - Building own composables
+- Routing with Vue Router
+  - Creating multi-page applications with Vue Router
+  - Configuring Routes and Navigation
+- State Management with Pinia or composables
+  - Introduction to state management
+  - Using Pinia stores to manage global state
+  - Exemplary usage of composables for state management
+- Slots
+  - Understanding slots and their usage
+  - Using named slots
+  - Sneak peek into Scoped slots
+- Vue and TypeScript
+  - Using TypeScript in the `script` part of the components
+  - Type-Checking with `vue-tsc`
+- Bonus: Nuxt.js
+  - Discovering benefits of the meta framework
 
 ## Target audience and requirements
 
@@ -56,11 +56,11 @@ This workshop is aimed for developers who have basic [JavaScript](/workshops/jav
 
 After this workshop, you will be able to:
 
-* Create Vue applications from scratch
-* Understand the core concepts of Vue.js 3
-* Use the Composition API to build own composables
-* Utilize Vue Router to create applications with multiple pages
-* Manage global state with Pinia
+- Create Vue applications from scratch
+- Understand the core concepts of Vue.js 3
+- Use the Composition API to build own composables
+- Utilize Vue Router to create applications with multiple pages
+- Manage global state with Pinia
 
 ## Format
 

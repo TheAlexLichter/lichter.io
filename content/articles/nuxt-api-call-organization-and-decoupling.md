@@ -33,19 +33,19 @@ For our example, we will use parts of the [JSON Placeholder API](https://github.
 
 Let’s take a look at the `posts` resource. What you want to do with it is:
 
-* _Create_ a post
-* _Show_ details of a specific post (eg. title and content)
-* Show an overview of (all/some) posts, also called a post _index_ (often used on an _index_ page as well)
-* _Update_ a post
-* _Delete_ a post
+- _Create_ a post
+- _Show_ details of a specific post (eg. title and content)
+- Show an overview of (all/some) posts, also called a post _index_ (often used on an _index_ page as well)
+- _Update_ a post
+- _Delete_ a post
 
 If we consider other resources, for example `users`, the pattern will repeat:
 
-* _Create_ a user
-* _Show_ a user’s details (for example on his profile page)
-* Show a list/an _index_ of all users (member list)
-* _Update_ a user
-* _Delete_ a user
+- _Create_ a user
+- _Show_ a user’s details (for example on his profile page)
+- Show a list/an _index_ of all users (member list)
+- _Update_ a user
+- _Delete_ a user
 
 With this knowledge, we can try to abstract our API with a Plain Old Javascript Object (**POJO**) by creating a method for each _verb_. A `class` would be fine as well.
 
@@ -63,8 +63,8 @@ export default {
 
   update(payload, id) {},
 
-  delete(id) {}
-}
+  delete(id) {},
+};
 ```
 
 Okay, so we have a basic scaffold for our API abstraction though we still have to fill the methods somehow. Now the `$axios` from the Nuxt axios module comes in handy. But… how can we add it to an external module? Trying to access `this.$axios` will fail.
@@ -76,20 +76,20 @@ Another term crosses our way: `Dependency Injection`. It’s a very common patte
 If you are **depending on a library** like axios you usually would import and use it like this:
 
 ```js
-import axios from 'axios'
+import axios from "axios";
 
 export default {
   async index() {
-    const result = await axios.get('...')
-    return result.data
-  }
-}
+    const result = await axios.get("...");
+    return result.data;
+  },
+};
 ```
 
 This is fine for many use-cases, but for that one, the approach comes with several disadvantages:
 
-* You can’t easily swap out the implementation for another one if you want to
-* The dependency has to be known before runtime
+- You can’t easily swap out the implementation for another one if you want to
+- The dependency has to be known before runtime
 
 While the former isn’t a huge issue in our case, the latter poses a problem for us. We _know_ the dependency but we can’t actually `import` it.
 
@@ -107,23 +107,23 @@ export default axios => ({
 Boom, **dependency injected**! Let’s fill out our original scaffold and make use of the `$axios` shorthands:
 
 ```js [~/api/repository.js]
-export default $axios => ({
+export default ($axios) => ({
   index() {
-    return $axios.$get('/posts')
+    return $axios.$get("/posts");
   },
   create(payload) {
-    return $axios.$post(`/posts`, payload)
+    return $axios.$post(`/posts`, payload);
   },
   show(id) {
-    return $axios.$get(`/posts/${id}`)
+    return $axios.$get(`/posts/${id}`);
   },
   update(payload, id) {
-    return $axios.$put(`/posts/${id}`, payload)
+    return $axios.$put(`/posts/${id}`, payload);
   },
   delete(id) {
-    return $axios.$delete(`/posts/${id}`)
-  }
-})
+    return $axios.$delete(`/posts/${id}`);
+  },
+});
 ```
 
 ## Generalize our implementation
@@ -144,17 +144,17 @@ export default $axios => resource => ({
 Now when we import our function somewhere, we can reuse it for many resources, but we only need to pass in the axios instance once:
 
 ```js
-import createRepository from '~/api/repository.js'
+import createRepository from "~/api/repository.js";
 
 // First, call the function with the axios object
 
-const $axios = getAxiosMagicallyFromSomewhere // we will find out how to get it further down the road
-const repositoryWithAxios = createRepository($axios)
+const $axios = getAxiosMagicallyFromSomewhere; // we will find out how to get it further down the road
+const repositoryWithAxios = createRepository($axios);
 
 // Now you can create repositories and re-use the `repositoryWithAxios` function
 
-const postRepository = repositoryWithAxios('posts')
-const userRepository = repositoryWithAxios('users')
+const postRepository = repositoryWithAxios("posts");
+const userRepository = repositoryWithAxios("users");
 // ...
 ```
 
@@ -164,8 +164,8 @@ With this pattern, you don’t have to pass in the options again and again.
 
 There we go. We have abstracted our API resources successfully and found a way to re-use that abstraction properly, but two problems are still unsolved.:
 
-* How can we **access** the abstraction throughout our Nuxt app?
-* How can we properly **pass in** the axios instance from the Nuxt module?
+- How can we **access** the abstraction throughout our Nuxt app?
+- How can we properly **pass in** the axios instance from the Nuxt module?
 
 To solve both problems at once we utilize a **Nuxt.js plugin**. They are mostly used to add global Vue components or libraries but can be used in many other ways too. Also, they are evaluated before creating the root Vue instance.
 
@@ -174,12 +174,12 @@ Okay, let’s create a file at `~/plugins/repository.js`.
 If the plugin has a default export function, two parameters will be passed to that function: The **Nuxt context** and a method called `inject`.
 
 ```js [~/plugins/repository.js]
-import createRepository from '~/api/repository.js'
+import createRepository from "~/api/repository.js";
 
 export default (ctx, inject) => {
   // Here we will do it
-}
-``` 
+};
+```
 
 Inside the function, we have everything we need to make our API repositories available across all relevant parts of our Nuxt app and to pass the axios instance to our construct.
 
@@ -188,45 +188,45 @@ Inside the function, we have everything we need to make our API repositories ava
 Because the context is available in the plugin default export method, we can pass in the axios instance without any problems:
 
 ```js [~/plugins/repository.js]{4,7-8}
-import createRepository from '~/api/repository.js'
+import createRepository from "~/api/repository.js";
 
 export default (ctx, inject) => {
-  const repositoryWithAxios = createRepository(ctx.$axios)
+  const repositoryWithAxios = createRepository(ctx.$axios);
 
   const repositories = {
-    posts: repositoryWithAxios('posts'),
-    users: repositoryWithAxios('users')
+    posts: repositoryWithAxios("posts"),
+    users: repositoryWithAxios("users"),
     //...
-  }
-}
-``` 
+  };
+};
+```
 
 ### Inject it
 
 Now the last (and mightiest) step has to be taken. Make the implementation available across our app so it can be used in components, `asyncData` and so on. The good thing is, we don’t have to implement this on our own. It will be handled completely by the `inject` method which is provided as the second argument to the plugin function:
 
 ```js [~/plugins/repository.js]
-import createRepository from '~/api/repository.js'
+import createRepository from "~/api/repository.js";
 
 export default (ctx, inject) => {
-  const repositoryWithAxios = createRepository(ctx.$axios)
+  const repositoryWithAxios = createRepository(ctx.$axios);
 
   const repositories = {
-    posts: repositoryWithAxios('posts'),
-    users: repositoryWithAxios('users')
+    posts: repositoryWithAxios("posts"),
+    users: repositoryWithAxios("users"),
     //...
-  }
+  };
 
-  inject('repositories', repositories)
-}
-``` 
+  inject("repositories", repositories);
+};
+```
 
 `inject` takes a name (used as key with `$` prefix) as the first argument and the value of that key as the second argument, which can be a primitive, an object or a function.
 
 Then `inject` will:
 
-* Add the key-value pair to the Vue prototype (so `this.$key` can be used in components and store
-* Add the key-value pair to the `ctx.app` object (so it can be used in `asyncData`, `fetch` and so on)
+- Add the key-value pair to the Vue prototype (so `this.$key` can be used in components and store
+- Add the key-value pair to the `ctx.app` object (so it can be used in `asyncData`, `fetch` and so on)
 
 ## Use it
 

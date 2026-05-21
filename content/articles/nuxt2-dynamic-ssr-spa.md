@@ -1,6 +1,6 @@
 ---
 title: "Selectively enable SSR or SPA mode in a Nuxt.js 2 app"
-description: "SSR comes with certain caveats, including no access to APIs like the local storage on server-side. But what if you could enable SSR only for pages where SEO is needed and use the \"traditional\" SPA mode elsewhere? You can! Learn how in this article."
+description: 'SSR comes with certain caveats, including no access to APIs like the local storage on server-side. But what if you could enable SSR only for pages where SEO is needed and use the "traditional" SPA mode elsewhere? You can! Learn how in this article.'
 dateModified: "2020-04-18"
 datePublished: "2018-12-29"
 topics:
@@ -24,22 +24,24 @@ Before going into detail on how to enable SSR selectively we should look into th
 1. Extract `req` and `res` (the request and response object from the request to the server) from the context object.
 
 ```js
-const { req, res } = context
+const { req, res } = context;
 ```
 
 2. If `context.spa` (might have been set through other internals before rendering pages) or `res.spa` (can be modified otherwise!) is truthy, treat the page that’ll be rendered as **SPA**.
 
 ```js
-const spa = context.spa || (res && res.spa)
+const spa = context.spa || (res && res.spa);
 ```
 
 3. In case SSR is _disabled_ or the page _should be treated as SPA_, only load metadata and render the page as SPA (with JavaScript files but no HTML included) through an _early return_.
 
 ```js
 if (!this.SSR || spa) {
-  const {/* ... */} = await this.renderer.spa.render(context)
-  const html = this.renderTemplate(/* ... */)
-  return { html, getPreloadFiles: this.getPreloadFiles.bind(this, { getPreloadFiles }) }
+  const {
+    /* ... */
+  } = await this.renderer.spa.render(context);
+  const html = this.renderTemplate(/* ... */);
+  return { html, getPreloadFiles: this.getPreloadFiles.bind(this, { getPreloadFiles }) };
 }
 ```
 
@@ -55,16 +57,16 @@ After looking into the source code we found out that all we have to do is to set
 A minimalist implementation would look like this:
 
 ```js
-export default function(req, res, next) {
-  const paths = ['/', '/a']
+export default function (req, res, next) {
+  const paths = ["/", "/a"];
 
   if (paths.includes(req.originalUrl)) {
     // Will trigger the "traditional SPA mode"
-    res.spa = true
+    res.spa = true;
   }
   // Don't forget to call next in all cases!
   // Otherwise, your app will be stuck forever :|
-  next()
+  next();
 }
 ```
 

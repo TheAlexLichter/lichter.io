@@ -21,7 +21,7 @@ My personal life changed quite at bit! After committing to a long-distance relat
 
 So, time for a change! And because I can work from anywhere, I decided to move to Amsterdam in April. While it wasn't easy to "leave my friends and family behind" - just physically of course, I'm really happy with the decision. Especially because it isn't the other side of the world and I can still visit them regularly in not even a day of traveling.
 
-Finding a flat wasn't that easy. But thanks to being a web developer, I could *optimize* a lot of the flat hunting. I even [gave a talk](/speaking/2023-07-28-clicks-to-cribs-wearedev/){:target="_blank"} on how I did it!
+Finding a flat wasn't that easy. But thanks to being a web developer, I could _optimize_ a lot of the flat hunting. I even [gave a talk](/speaking/2023-07-28-clicks-to-cribs-wearedev/){:target="\_blank"} on how I did it!
 
 Amsterdam is a beautiful city, and I'm really happy to live here. Not too big (hey Berlin!), but also not too small - beautiful architecture, vegetation and full of bike roads. Not that we don't have them in Germany, but it's a different level here. And I love it!
 
@@ -31,10 +31,9 @@ One thing that was a bit unusual for me though - flats in the Netherlands often 
 
 :blog-image{src="/img/blog/2023-my-recap/new-flat.jpg" width="500" height="375" alt="Niki and me standing in our apartment without flooring, but with the keys!"}
 
-
 ### Traveling to unknown Places ✈️
 
-Besides getting to know Amsterdam better and better, I also had the opportunity to travel to new places and even new countries! From going to Brussels for a long weekend [meeting with a good friend](https://twitter.com/phip1611/){:target="_blank"} and doing some sightseeing, to traveling to Cambridge and Oxford after a conference, I've seen a lot. One of the most amazing trips this year was to Toronto, Canada. Before [speaking at VueConf Toronto](/speaking/2023-11-10-vue-seo-universe-vue-toronto/){:target="_blank"}, I had the chance to explore the city and meet some amazing people. In addition, I also had the chance to visit the Niagara Falls, which was a great experience. Maybe a bit cold (4°C), but still a breathtaking view.
+Besides getting to know Amsterdam better and better, I also had the opportunity to travel to new places and even new countries! From going to Brussels for a long weekend [meeting with a good friend](https://twitter.com/phip1611/){:target="\_blank"} and doing some sightseeing, to traveling to Cambridge and Oxford after a conference, I've seen a lot. One of the most amazing trips this year was to Toronto, Canada. Before [speaking at VueConf Toronto](/speaking/2023-11-10-vue-seo-universe-vue-toronto/){:target="\_blank"}, I had the chance to explore the city and meet some amazing people. In addition, I also had the chance to visit the Niagara Falls, which was a great experience. Maybe a bit cold (4°C), but still a breathtaking view.
 
 :blog-image{src="/img/blog/2023-my-recap/niagara-falls.jpg" width="500" height="375" alt="Drinking a cold beverage with the Niagara Falls in the background"}
 
@@ -50,7 +49,7 @@ And it is always fascinating to meet the people you know from the internet in pe
 
 ### Studying
 
-Ehh, yes. That might be a weird fact (sometimes even fun fact), but I am *still* studying at the university in Dresden. Nevertheless, I'm finally at the end of my studies and started writing my thesis this fall. I hope to finish it in the first quarter of 2024 and finally get my degree - but a few more pages (read: at least sixty) are between me and that goal. So, wish me luck!
+Ehh, yes. That might be a weird fact (sometimes even fun fact), but I am _still_ studying at the university in Dresden. Nevertheless, I'm finally at the end of my studies and started writing my thesis this fall. I hope to finish it in the first quarter of 2024 and finally get my degree - but a few more pages (read: at least sixty) are between me and that goal. So, wish me luck!
 
 ### Health
 
@@ -64,12 +63,9 @@ My work-life balance, on the other hand, is still good. The only thing that coul
 
 :blog-image{src="/img/blog/2023-my-recap/gh-contributions.jpg" width="2854" height="752" alt="My GitHub contribution graph for 2023 showing a total of 1880 contributions"}
 
-It is important to mention that most of my contributions are not code-related and therefore **not fully covered by the GitHub graph**. Most of my tasks I'd described as "community engineering and management" tasks. They range from triaging issues and PRs, answering questions on Discord, Twitter and other channels, to improving documentation and more. Non-code contributions are an *essential* and important part of open source, and I'm happy to help with it.
+It is important to mention that most of my contributions are not code-related and therefore **not fully covered by the GitHub graph**. Most of my tasks I'd described as "community engineering and management" tasks. They range from triaging issues and PRs, answering questions on Discord, Twitter and other channels, to improving documentation and more. Non-code contributions are an _essential_ and important part of open source, and I'm happy to help with it.
 
 Of course, I also shared my knowledge at conferences, rewrote my website and even started creating more content again. I'll cover that in the next two sections - [Speaking](#speaking) and [Content Creation](#content-creation).
-
-
-
 
 ## Speaking
 
@@ -78,7 +74,7 @@ Speaking is one of the things I really enjoy. I love to share my knowledge and e
 **In numbers**, I gave **13 talks** and was part of **2 panels** at **4 meetups** and **9 conferences**.
 In addition, I was an MC at **WeAreDevelopers** and **Vue.js Amsterdam**. You can find the full list on the [speaking page](/speaking/) here!
 
-Fun fact: The busiest conference was WeAreDevelopers, where I was MC'ing, part of a panel and gave *two* talks. That was a lot of joy, but also a lot of work.
+Fun fact: The busiest conference was WeAreDevelopers, where I was MC'ing, part of a panel and gave _two_ talks. That was a lot of joy, but also a lot of work.
 
 I definitely want to continue speaking at conferences and meetups in 2024. I had a blast and it is a great way to meet new people and share knowledge. I don't have a definitive number of talks I want to give in 2024, but I think 8 is a good rough estimate.
 
@@ -128,28 +124,28 @@ In 2023, I worked together with incredible people and companies. Business-wise, 
 
 To finish this years recap, I want to set some goals for 2024 that I want to achieve. Some are "SMART" but some goals might not have a fixed number attached to them. While this might not be the best way to set goals, I think there are some goals that are not measurable but still achievable.
 
-* Personal
-  * Get a good gym routine, going at least once a week without more than two weeks of break (due to conferences, holidays, etc.)
-  * Lose weight and get in shape - at least 10kg - and keep it below that
-  * Travel to two or more new places I haven't been to yet
-  * Continue to learn Hungarian
-  * Start learning Dutch
-  * Keep my work-life balance as good as it is right now
-  * Finish my thesis (finally - due time is March)
-  * Improve my time management and planning skills
-* Open Source
-  * Invest time into open source and the community consistently (at least half a day a week, but probably more than that)
-* Content Creation
-  * Release at least 52 videos on YouTube - that's roughly once a week again
-  * Become a YouTube partner
-  * Write minimum 4 blog posts
-  * Do a livestream on Twitch every quarter, at least.
-  * ~~Send out the first newsletter, then decide on a schedule (possibly 1x a quarter?)~~
-* Speaking
-  * Be a speaker at ~8 conferences or meetups - I want to continue speaking at conferences and meetups and share my knowledge with the community. No fixed number here, but I think 8 is a good baseline. I want to pick the conferences I speak at more carefully and focus on the ones that I really want to attend.
-* Business
-  * Continue to being able to pay my bills with my own company
-  * Increase my companies profit by at least 10% compared to 2023 (no absolute numbers here, sorry folks!)
+- Personal
+  - Get a good gym routine, going at least once a week without more than two weeks of break (due to conferences, holidays, etc.)
+  - Lose weight and get in shape - at least 10kg - and keep it below that
+  - Travel to two or more new places I haven't been to yet
+  - Continue to learn Hungarian
+  - Start learning Dutch
+  - Keep my work-life balance as good as it is right now
+  - Finish my thesis (finally - due time is March)
+  - Improve my time management and planning skills
+- Open Source
+  - Invest time into open source and the community consistently (at least half a day a week, but probably more than that)
+- Content Creation
+  - Release at least 52 videos on YouTube - that's roughly once a week again
+  - Become a YouTube partner
+  - Write minimum 4 blog posts
+  - Do a livestream on Twitch every quarter, at least.
+  - ~~Send out the first newsletter, then decide on a schedule (possibly 1x a quarter?)~~
+- Speaking
+  - Be a speaker at ~8 conferences or meetups - I want to continue speaking at conferences and meetups and share my knowledge with the community. No fixed number here, but I think 8 is a good baseline. I want to pick the conferences I speak at more carefully and focus on the ones that I really want to attend.
+- Business
+  - Continue to being able to pay my bills with my own company
+  - Increase my companies profit by at least 10% compared to 2023 (no absolute numbers here, sorry folks!)
 
 ## Conclusion
 

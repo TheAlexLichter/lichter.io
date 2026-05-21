@@ -1,37 +1,36 @@
 <script setup lang="ts">
 const props = defineProps<{
-  error: unknown
-}>()
+  error: unknown;
+}>();
 
 useHead({
   bodyAttrs: {
-    class: 'bg-black antialiased min-h-screen text-white'
+    class: "bg-black antialiased min-h-screen text-white",
   },
-})
+});
 
 const statusCode = computed(() => {
-  if(typeof props.error !== 'object' || props.error === null) {
-    return 500
+  if (typeof props.error !== "object" || props.error === null) {
+    return 500;
   }
-  if('statusCode' in props.error) {
-    return props.error.statusCode 
+  if ("statusCode" in props.error) {
+    return props.error.statusCode;
   }
-  return 500
-})
+  return 500;
+});
 
 const message = computed(() => {
-  if(typeof props.error !== 'object' || props.error === null) {
-    return 'Unknown error'
+  if (typeof props.error !== "object" || props.error === null) {
+    return "Unknown error";
   }
-  if('statusMessage' in props.error) {
-    return props.error.statusMessage
+  if ("statusMessage" in props.error) {
+    return props.error.statusMessage;
   }
-  if('message' in props.error) {
-    return props.error.message
+  if ("message" in props.error) {
+    return props.error.message;
   }
-  return 'Unknown error'
-})
-
+  return "Unknown error";
+});
 </script>
 
 <template>

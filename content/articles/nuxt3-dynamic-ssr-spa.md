@@ -16,7 +16,7 @@ In Nuxt 2, you could already selectively enable SSR or SPA mode based on the pag
 
 ## Prelude - The \<ClientOnly> component
 
-A common solution to render *parts* of your application only on the client is the [`<ClientOnly>` component](https://nuxt.com/docs/api/components/client-only). It is provided by default through Nuxt and can be used as a wrapper component around the content you want to render only on the client side. The following example shows how to use it:
+A common solution to render _parts_ of your application only on the client is the [`<ClientOnly>` component](https://nuxt.com/docs/api/components/client-only). It is provided by default through Nuxt and can be used as a wrapper component around the content you want to render only on the client side. The following example shows how to use it:
 
 ```vue
 <ClientOnly>
@@ -44,9 +44,9 @@ Since the introduction of [`routeRoules`](https://nuxt.com/docs/guide/concepts/r
 ```ts [nuxt.config.ts]
 export default defineNuxtConfig({
   routeRules: {
-    '/spa-route-rule': { ssr: false }
-  }
-})
+    "/spa-route-rule": { ssr: false },
+  },
+});
 ```
 
 This also works for all routes that match a certain pattern, using a wildcard. Then you also have to add the index URL manually though:
@@ -54,10 +54,10 @@ This also works for all routes that match a certain pattern, using a wildcard. T
 ```ts [nuxt.config.ts]
 export default defineNuxtConfig({
   routeRules: {
-    '/spa-route-rule': { ssr: false },
-    '/spa-route-rule/**': { ssr: false }
-  }
-})
+    "/spa-route-rule": { ssr: false },
+    "/spa-route-rule/**": { ssr: false },
+  },
+});
 ```
 
 This is the recommended approach. But sometimes, just choosing the route might not be enough!
@@ -71,25 +71,25 @@ export default defineNuxtConfig({
   experimental: {
     respectNoSSRHeader: true,
   },
-})
+});
 ```
 
-Using the header is a rather uncommon solution, but it might be useful for debugging a staging environment. Also, be aware that this is an *experimental feature* and could be adapted/changed in the future without a major version bump.
+Using the header is a rather uncommon solution, but it might be useful for debugging a staging environment. Also, be aware that this is an _experimental feature_ and could be adapted/changed in the future without a major version bump.
 As a last note: You might not want to enable this feature in production, as it could be used to disable SSR for all pages.
 
 ## Solution 3 - A custom Nitro middleware
 
-If you really want some *fine-grained* control over the SSR/SPA mode, you can always write your own Nitro middleware, very similar to the [`serverMiddleware` approach back in Nuxt 2](/articles/nuxt2-dynamic-ssr-spa/).
+If you really want some _fine-grained_ control over the SSR/SPA mode, you can always write your own Nitro middleware, very similar to the [`serverMiddleware` approach back in Nuxt 2](/articles/nuxt2-dynamic-ssr-spa/).
 This is also the most flexible solution, as you can implement any logic you want. The following example shows how to disable SSR for a path including `/spa-header-custom`:
 
 ```ts [server/middleware/disable-ssr.ts]
 export default defineEventHandler((event) => {
-  if (!event.path.includes('/spa-header-custom')) {
-    return
+  if (!event.path.includes("/spa-header-custom")) {
+    return;
   }
-  event.context.nuxt = event.context.nuxt || {}
-  event.context.nuxt.noSSR = true
-})
+  event.context.nuxt = event.context.nuxt || {};
+  event.context.nuxt.noSSR = true;
+});
 ```
 
 Be aware that this approach relies on internals, though breaking changes are unlikely to happen here. Also, the `x-nuxt-no-ssr` header is [implemented the same way internally](https://github.com/nuxt/nuxt/blob/fb26a160f5c14799317cf059499f1d41de0481e0/packages/nuxt/src/core/runtime/nitro/no-ssr.ts#L5-L6).

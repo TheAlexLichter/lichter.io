@@ -13,6 +13,6 @@ topics:
   - nitro
 ---
 
-Back at enterJS in Mainz - this time not with a classic Nuxt 3 introduction but with a look at where Nuxt is *right now* and where the framework is heading in the upcoming months.
+Back at enterJS in Mainz - this time not with a classic Nuxt 3 introduction but with a look at where Nuxt is _right now_ and where the framework is heading in the upcoming months.
 
 We walked through the features that make Nuxt a capable full-stack framework in 2024, the ecosystem around it, and discussed what enterprise teams should keep on their radar when building new Vue applications on top of Nuxt.

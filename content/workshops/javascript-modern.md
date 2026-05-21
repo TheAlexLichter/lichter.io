@@ -16,19 +16,19 @@ In this workshop, we will delve into the key advancements and language enhanceme
 
 ## Agenda
 
-* How does JavaScript evolve?
-  * ECMAScript and the TC39
-  * The TC39 process
-  * The TC39 proposals
-* Hands-on exercises
-  * Handpicked tasks for each ES version
-  * Tailored to your projects/use cases
-  * Exercises are based on real-world examples
-* Current Stage 4 and Stage 3 proposals
-  * Explaining them in detail
-  * Examples and exercises to each
-* BONUS: Stage 2 proposals
-  * Outlook to the future of JavaScript
+- How does JavaScript evolve?
+  - ECMAScript and the TC39
+  - The TC39 process
+  - The TC39 proposals
+- Hands-on exercises
+  - Handpicked tasks for each ES version
+  - Tailored to your projects/use cases
+  - Exercises are based on real-world examples
+- Current Stage 4 and Stage 3 proposals
+  - Explaining them in detail
+  - Examples and exercises to each
+- BONUS: Stage 2 proposals
+  - Outlook to the future of JavaScript
 
 ## Target audience and requirements
 

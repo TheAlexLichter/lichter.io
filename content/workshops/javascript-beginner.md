@@ -17,44 +17,44 @@ In this workshop, JavaScript will be demystified, providing a clear and accessib
 
 ## Agenda
 
-* Introduction to JavaScript
-  * Brief history of JavaScript
-  * What is JavaScript?
-  * Where can JavaScript be used?
-* The IDE
-  * Setting up Visual Studio Code
-* JavaScript Basics
-  * Variables
-  * Data Types
-  * Syntax and Operators
-* Functions and Control Flow
-  * Creating Functions
-  * Control Flow in your code
-  * Loops
-* The Document Object Model (DOM)
-  * What is the DOM?
-  * Selecting DOM elements
-  * Manipulating DOM elements
-* Event Handling
-  * What are events?
-  * Handling events
-  * Event bubbling and delegation
-* Using Complex Data Types
-  * Arrays and their methods
-  * Objects and their methods
-  * Caveats
-* Asynchronous JavaScript
-  * Callbacks
-  * Promises
-  * `async`/`await`
-* Error Handling
-  * `try`/`catch`
-  * `throw`
-  * `finally`
-* Modules
-  * What are modules?
-  * Importing and exporting modules
-  * CommonJS vs. ES Modules
+- Introduction to JavaScript
+  - Brief history of JavaScript
+  - What is JavaScript?
+  - Where can JavaScript be used?
+- The IDE
+  - Setting up Visual Studio Code
+- JavaScript Basics
+  - Variables
+  - Data Types
+  - Syntax and Operators
+- Functions and Control Flow
+  - Creating Functions
+  - Control Flow in your code
+  - Loops
+- The Document Object Model (DOM)
+  - What is the DOM?
+  - Selecting DOM elements
+  - Manipulating DOM elements
+- Event Handling
+  - What are events?
+  - Handling events
+  - Event bubbling and delegation
+- Using Complex Data Types
+  - Arrays and their methods
+  - Objects and their methods
+  - Caveats
+- Asynchronous JavaScript
+  - Callbacks
+  - Promises
+  - `async`/`await`
+- Error Handling
+  - `try`/`catch`
+  - `throw`
+  - `finally`
+- Modules
+  - What are modules?
+  - Importing and exporting modules
+  - CommonJS vs. ES Modules
 
 ## Target audience and requirements
 

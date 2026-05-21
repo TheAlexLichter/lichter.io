@@ -1,52 +1,47 @@
-import tailwindcss from '@tailwindcss/vite'
-import type { PluginOption } from 'vite'
+import tailwindcss from "@tailwindcss/vite";
+import type { PluginOption } from "vite";
 
 export default defineNuxtConfig({
-  css: ['~/assets/css/main.css'],
+  css: ["~/assets/css/main.css"],
   routeRules: {
-    '/support-me/': { redirect: { to: '/sponsors/', statusCode: 301 } },
-    '/timeline/': { redirect: { to: '/about/', statusCode: 301 } },
-    '/slides/**': { redirect: { to: 'https://slides.com/mannil/**', statusCode: 302 } },
-    '/nuxt-dynamic-ssr-spa/': { redirect: { to: '/nuxt3-dynamic-ssr-spa/', statusCode: 301 } },
+    "/support-me/": { redirect: { to: "/sponsors/", statusCode: 301 } },
+    "/timeline/": { redirect: { to: "/about/", statusCode: 301 } },
+    "/slides/**": { redirect: { to: "https://slides.com/mannil/**", statusCode: 302 } },
+    "/nuxt-dynamic-ssr-spa/": { redirect: { to: "/nuxt3-dynamic-ssr-spa/", statusCode: 301 } },
   },
 
   runtimeConfig: {
     public: {
       site: {
-        url: 'https://www.lichter.io',
-      }
-    }
+        url: "https://www.lichter.io",
+      },
+    },
   },
 
   vite: {
-    plugins: [
-      tailwindcss() as PluginOption,
-    ],
+    plugins: [tailwindcss() as PluginOption],
   },
 
   modules: [
-    '@vueuse/nuxt',
-    '@nuxt/icon',
-    '@nuxt/content',
-    '@nuxtjs/seo',
-    '@nuxt/image',
-    '@nuxtjs/plausible',
+    "@vueuse/nuxt",
+    "@nuxt/icon",
+    "@nuxt/content",
+    "@nuxtjs/seo",
+    "@nuxt/image",
+    "@nuxtjs/plausible",
   ],
 
   nitro: {
-    preset: 'cloudflare_module',
+    preset: "cloudflare_module",
     prerender: {
       crawlLinks: true,
-      routes: [
-        '/',
-        '/feed.xml',
-      ],
+      routes: ["/", "/feed.xml"],
     },
   },
 
   site: {
-    url: 'https://www.lichter.io',
-    name: 'Alexander Lichter',
+    url: "https://www.lichter.io",
+    name: "Alexander Lichter",
     trailingSlash: true,
   },
 
@@ -57,22 +52,22 @@ export default defineNuxtConfig({
   },
 
   plausible: {
-    domain: 'lichter.io',
-    apiHost: 'https://plausible.lichter.io',
+    domain: "lichter.io",
+    apiHost: "https://plausible.lichter.io",
   },
 
   content: {
     build: {
       markdown: {
         remarkPlugins: {
-          'remark-reading-time': {},
+          "remark-reading-time": {},
         },
         highlight: {
-          theme: 'vitesse-dark',
+          theme: "vitesse-dark",
         },
       },
     },
   },
 
-  compatibilityDate: '2025-05-01'
-})
+  compatibilityDate: "2025-05-01",
+});

@@ -30,17 +30,17 @@ The only thing our components needs is a template with a single image tag using 
 When using the `assets` folder, you can either use relative paths or an alias like `@` or `~`, which comes pre-configured in Nuxt:
 
 ```vue [via alias]
-<img src="@/assets/doggos/riley.jpg">
-```  
+<img src="@/assets/doggos/riley.jpg" />
+```
 
 ```vue [relative path]
-<img src="../assets/doggos/riley.jpg">
+<img src="../assets/doggos/riley.jpg" />
 ```
 
 In case you are using the `public` folder, the files will be mapped to your domain eventually, so you can omit the `public`:
 
 ```vue
-<img src="/doggos/riley.jpg">
+<img src="/doggos/riley.jpg" />
 ```
 
 So far so good -- but what if we have a _list of cute puppies_ and the user can **decide which image to display on the page**?
@@ -53,8 +53,8 @@ Let's say we load the dynamic image source via Vue’s binding system. Imagine w
 
 ```vue [components/doggos.vue]
 <script setup lang="ts">
-const dogNames = ['Riley', 'Annie', 'Marvin'];
-const selectedDog = ref('');
+const dogNames = ["Riley", "Annie", "Marvin"];
+const selectedDog = ref("");
 </script>
 
 <template>
@@ -66,22 +66,21 @@ const selectedDog = ref('');
     <img :src="`/doggos/${selectedDog.toLowerCase()}.jpg`" width="500" :alt="selectedDog" />
   </div>
 </template>
-
 ```
 
 All that is left to do is to retrieve the correct image for the `selectedDog`.
 
 ```vue
-<img :src="`/doggos/${selectedDog.toLowerCase()}.jpg`" :alt="selectedDog">
+<img :src="`/doggos/${selectedDog.toLowerCase()}.jpg`" :alt="selectedDog" />
 ```
 
 And it works! We can now select a puppy and the image will be displayed. Open [this CodeSandbox](https://stackblitz.com/edit/vue3-dynamic-images-public-folder) to see the code up and running.
 
 This approach has a few downsides though:
 
-* Caching: The image will be cached by the browser, so if we want to change the image, we have to change the file name as well. This is not optimal, especially if we want to use the same image in multiple places.
-* Image optimization: The image will not be optimized by Vite plugins or similar, so we have to do it manually.
-* Image size: The image will be loaded in its original size, which can be a problem for mobile users with a slow connection if the image is big.
+- Caching: The image will be cached by the browser, so if we want to change the image, we have to change the file name as well. This is not optimal, especially if we want to use the same image in multiple places.
+- Image optimization: The image will not be optimized by Vite plugins or similar, so we have to do it manually.
+- Image size: The image will be loaded in its original size, which can be a problem for mobile users with a slow connection if the image is big.
 
 Let's take a look how the approach for the `assets` folder looks like:
 
@@ -92,7 +91,7 @@ Alright, let's take the code from above as base. As a naive approach, why not ju
 ### Naive approach
 
 ```vue
-<img :src="`../assets/doggos/${selectedDog.toLowerCase()}.jpg`" :alt="selectedDog">
+<img :src="`../assets/doggos/${selectedDog.toLowerCase()}.jpg`" :alt="selectedDog" />
 ```
 
 Let’s add that line quickly and see what happens when we push the button mapped to Riley…
@@ -100,7 +99,7 @@ Let’s add that line quickly and see what happens when we push the button mappe
 **Bummer, a broken image** and only the alt tag! Let us take a look at the DOM. It contains the following image tag:
 
 ```html
-<img src="../assets/doggos/riley.jpg" alt="Riley">
+<img src="../assets/doggos/riley.jpg" alt="Riley" />
 ```
 
 It means that the **asset path hasn’t been replaced**. It is the string that the expression in our template string above evaluates to, but no bundler magic happens.
@@ -125,8 +124,7 @@ It is very important to be as strict as possible, otherwise you can end up with 
 
 ```vue
 <script setup lang="ts">
-
-const glob = import.meta.glob('@/assets/doggos/*.jpg', { eager: true })
+const glob = import.meta.glob("@/assets/doggos/*.jpg", { eager: true });
 </script>
 ```
 
@@ -154,12 +152,12 @@ to extract the filename from the path, we can use the `filename` function from [
 
 ```vue
 <script setup lang="ts">
-import { filename } from 'pathe/utils'
+import { filename } from "pathe/utils";
 
-const glob = import.meta.glob('@/assets/doggos/*.jpg', { eager: true })
+const glob = import.meta.glob("@/assets/doggos/*.jpg", { eager: true });
 const images = Object.fromEntries(
-  Object.entries(glob).map(([key, value]) => [filename(key), value.default])
-)
+  Object.entries(glob).map(([key, value]) => [filename(key), value.default]),
+);
 </script>
 ```
 
@@ -169,14 +167,14 @@ Now, let's put it all together!
 
 ```vue
 <script setup lang="ts">
-import { filename } from 'pathe/utils'
-const dogNames = ['Riley', 'Annie', 'Marvin'];
-const selectedDog = ref('');
+import { filename } from "pathe/utils";
+const dogNames = ["Riley", "Annie", "Marvin"];
+const selectedDog = ref("");
 
-const glob = import.meta.glob('@/assets/doggos/*.jpg', { eager: true })
+const glob = import.meta.glob("@/assets/doggos/*.jpg", { eager: true });
 const images = Object.fromEntries(
-  Object.entries(glob).map(([key, value]) => [filename(key), value.default])
-)
+  Object.entries(glob).map(([key, value]) => [filename(key), value.default]),
+);
 </script>
 
 <template>
@@ -185,11 +183,7 @@ const images = Object.fromEntries(
       <input type="radio" :value="doggo" v-model="selectedDog" />
       {{ doggo }}
     </label>
-    <img
-      :src="images[`${selectedDog.toLowerCase()}`]"
-      width="500"
-      :alt="selectedDog"
-    />
+    <img :src="images[`${selectedDog.toLowerCase()}`]" width="500" :alt="selectedDog" />
   </div>
 </template>
 ```
@@ -198,13 +192,13 @@ To see the code in action, you can also check out the [StackBlitz](https://stack
 
 And we achieve a similar result to the `public` folder approach, but with the benefits of the `assets` folder:
 
-* Caching: As vite will add a hash to the name of each image, we can change the image without changing the file name and the cache will be busted.
-* Image optimization: The image can be optimized by vite plugins like [`vite-plugin-image-optimizer`](https://github.com/FatehAK/vite-plugin-image-optimizer), so we don't have to do it manually.
+- Caching: As vite will add a hash to the name of each image, we can change the image without changing the file name and the cache will be busted.
+- Image optimization: The image can be optimized by vite plugins like [`vite-plugin-image-optimizer`](https://github.com/FatehAK/vite-plugin-image-optimizer), so we don't have to do it manually.
 
 But it has also some downsides:
 
-* Image name: The image name will be changed, so linking it outside of your app will be nearly impossible
-* Perf-overhead: Importing the modules via glob add some overhead to the computed time, which is not optimal.
+- Image name: The image name will be changed, so linking it outside of your app will be nearly impossible
+- Perf-overhead: Importing the modules via glob add some overhead to the computed time, which is not optimal.
 
 ## The solution
 

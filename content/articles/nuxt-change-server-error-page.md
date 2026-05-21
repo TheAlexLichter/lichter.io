@@ -1,12 +1,11 @@
 ---
 title: "Change the Nuxt 2 server error page"
-description: "Almost every Nuxt.js developer has seen the \"evil grey page\" that is displayed after a server-side error (for example a failing API call in asyncData or fetch without a try-catch block around it). Pretty sure many of you want to change it to make it fit to your design."
+description: 'Almost every Nuxt.js developer has seen the "evil grey page" that is displayed after a server-side error (for example a failing API call in asyncData or fetch without a try-catch block around it). Pretty sure many of you want to change it to make it fit to your design.'
 dateModified: "2020-04-18"
 datePublished: "2020-08-18"
 topics:
   - nuxt
 ---
-
 
 I bet every developer using Nuxt 2 has seen this error page at least once:
 
@@ -23,9 +22,9 @@ Let’s create a new dummy page called `error.vue` in the `pages` folder:
 ```js [pages/error.vue]
 export default {
   asyncData() {
-    throw new Error(':(')
-  }
-}
+    throw new Error(":(");
+  },
+};
 ```
 
 To see the page you have to boot up the project in **production mode**. Otherwise `youch` will kick in and give you information about the occurred error. After going through `npm run build && npm start`, open the page (f.ex. with `localhost:3000/error`) and you should see the error page.
@@ -39,18 +38,18 @@ Do you like the style and only want to change the text there? No problem! You ca
 ```js [nuxt.config.js]{4-9}
 export default {
   messages: {
-      loading: 'Loading...',
-      error_404: 'This page could not be found',
-      server_error: 'Server error',
-      nuxtjs: 'Nuxt.js',
-      back_to_home: 'Back to the home page',
-      server_error_details:
-        'An error occurred in the application and your page could not be served. If you are the application owner, check your logs for details.',
-      client_error: 'Error',
-      client_error_details:
-        'An error occurred while rendering the page. Check developer tools console for details.'
-  }
-}
+    loading: "Loading...",
+    error_404: "This page could not be found",
+    server_error: "Server error",
+    nuxtjs: "Nuxt.js",
+    back_to_home: "Back to the home page",
+    server_error_details:
+      "An error occurred in the application and your page could not be served. If you are the application owner, check your logs for details.",
+    client_error: "Error",
+    client_error_details:
+      "An error occurred while rendering the page. Check developer tools console for details.",
+  },
+};
 ```
 
 I’ve highlighted the lines that influence the text of the default server error page. Let’s change them and see what happens!
@@ -58,12 +57,12 @@ I’ve highlighted the lines that influence the text of the default server error
 ```js [nuxt.config.js]
 export default {
   messages: {
-      server_error: 'Oh no! Server error',
-      nuxtjs: 'Is this Nuxt.js?',
-      back_to_home: 'Cmon, back home!',
-      server_error_details: 'Uh uh :| Server errorrrrr',
-  }
-}
+    server_error: "Oh no! Server error",
+    nuxtjs: "Is this Nuxt.js?",
+    back_to_home: "Cmon, back home!",
+    server_error_details: "Uh uh :| Server errorrrrr",
+  },
+};
 ```
 
 ![Altered Nuxt Server Error Page showing the heading 'Oh No! Server error' and the message 'Uh uh :| Server errorrrrr'](https://img.lichter.io/blog/customize-server-error-page/changed-nuxt-server-error-page-full.jpg)

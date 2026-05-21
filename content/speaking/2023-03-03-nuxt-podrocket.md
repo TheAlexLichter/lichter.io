@@ -1,6 +1,6 @@
 ---
 title: "Nuxt in 2023"
-description: "In this PodRocket episode, I had the pleasure of discussing various aspects of Nuxt.js and web development with Paul, co-host of the show. We covered topics like the evolution from Nuxt 2 to Nuxt 3, and discussing new Nuxt 3 features, including the groundbreaking \"extends\" functionality."
+description: 'In this PodRocket episode, I had the pleasure of discussing various aspects of Nuxt.js and web development with Paul, co-host of the show. We covered topics like the evolution from Nuxt 2 to Nuxt 3, and discussing new Nuxt 3 features, including the groundbreaking "extends" functionality.'
 date: "2023-03-03"
 eventName: "PodRocket"
 podcastUrl: "https://podrocket.logrocket.com/nuxt-2023"

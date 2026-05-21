@@ -9,6 +9,7 @@ topics:
   - javascript
   - compression
 ---
+
 As a developer, you likely want to squeeze every unnecessary bit out of your Nuxt.js app. To accomplish this there are lots of nifty tools: From code-splitting over caching to compression. This post focuses on the latter.
 
 :toc
@@ -60,13 +61,13 @@ Now edit your `nuxt.config.js` (or create one if there is none in your project y
 `nuxt.config.js`
 
 ```js
-import shrinkRay from 'shrink-ray-current'
+import shrinkRay from "shrink-ray-current";
 
 export default {
   render: {
-    compressor: shrinkRay()
-  }
-}
+    compressor: shrinkRay(),
+  },
+};
 ```
 
 Be careful to actually **invoke `shrinkRay`** (so don’t miss the `()` after).
@@ -75,7 +76,7 @@ And that’s it! Start your app (in _production mode_, otherwise no compression 
 
 If you see `gzip` instead, then you should try to open the same page in Google Chrome. I’m a heavy Firefox user, but Firefox refused to enable `Brotli` on localhost. As `Brotli` will only be **served over `HTTPS`**, that seems like a correct behavior first but because `localhost` is considered a “safe origin” (service workers are allowed, …) it’s a bug.
 
-  ![Network tab showing several loaded scripts in Brotli compression](https://img.lichter.io/blog/nuxt-on-brotli/network-tab-brotli-compression-full.jpg)
+![Network tab showing several loaded scripts in Brotli compression](https://img.lichter.io/blog/nuxt-on-brotli/network-tab-brotli-compression-full.jpg)
 
 Firefox network tab displaying different scripts loaded with Brotli compression
 
@@ -97,39 +98,39 @@ I usually create a mapping from `/api/` to `api.myurl.com`
 
 ```js
 export default {
-  modules: ['@nuxtjs/axios'],
+  modules: ["@nuxtjs/axios"],
   render: {
-    compressor: shrinkRay()
+    compressor: shrinkRay(),
   },
   // ...
   proxy: {
-    '/api/': { target: 'api.myurl.com', pathRewrite: { '^/api/': '' } }
-  }
+    "/api/": { target: "api.myurl.com", pathRewrite: { "^/api/": "" } },
+  },
   // ...
-}
+};
 ```
 
 You now have to exclude all requests starting with `/api/`. We leverage `shrink-ray`'s `filter` object and the built-in equally named function to implement this behavior.
 
 ```js [nuxt.config.js]
 export default {
-  modules: ['@nuxtjs/axios'],
-    render: {
+  modules: ["@nuxtjs/axios"],
+  render: {
     compressor: shrinkRay({
       filter: (req, res) => {
         if (/^\/api/.test(req.originalUrl)) {
-          return false
+          return false;
         }
-        return shrinkRay.filter(req, res)
-      }
-    })
+        return shrinkRay.filter(req, res);
+      },
+    }),
   },
   // ...
   proxy: {
-    '/api/': { target: 'api.myurl.com', pathRewrite: { '^/api/': '' } }
-  }
+    "/api/": { target: "api.myurl.com", pathRewrite: { "^/api/": "" } },
+  },
   // ...
-}
+};
 ```
 
 Now we exclude all `/api` requests and will otherwise delegate the filtering back to `shrink-ray`.

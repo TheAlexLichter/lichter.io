@@ -1,20 +1,21 @@
 <script setup lang="ts">
-import { cloneVNode } from 'vue';
+import { cloneVNode } from "vue";
 
 const props = defineProps<{
-  meeting: string
-}>()
+  meeting: string;
+}>();
 
-const slots = useSlots()
+const slots = useSlots();
 const Comp = () => {
-  const slot = slots.default?.()[0]
+  const slot = slots.default?.()[0];
   if (!slot) {
-    return
+    return;
   }
-  const node = cloneVNode(slot, { 
-    'data-cal-link': `alichter/${props.meeting}` })
-  return node
-}
+  const node = cloneVNode(slot, {
+    "data-cal-link": `alichter/${props.meeting}`,
+  });
+  return node;
+};
 </script>
 
 <template>

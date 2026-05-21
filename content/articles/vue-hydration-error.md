@@ -34,9 +34,9 @@ The first one appears **only in development** regardless of the mode:
 ```sh
 Parent:  <div class="container"> client-hook-3.js:1:16358
 Mismatching childNodes vs. VNodes: NodeList(3) [ p, p, p ]  Array [ {…} ]
-    
+
 [Vue warn]: The client-side rendered virtual DOM tree is not matching server-rendered content.
-This is likely caused by incorrect HTML markup, for example nesting block-level elements inside <p>, or missing <tbody>. 
+This is likely caused by incorrect HTML markup, for example nesting block-level elements inside <p>, or missing <tbody>.
 Bailing hydration and performing full client-side render.
 ```
 
@@ -84,12 +84,12 @@ When you include dates or timestamps on your website you should be careful and m
 ```js
 export const deterministicRotate = (arr) => {
   if (arr.length <= 1) {
-    return arr
+    return arr;
   }
-  const rotations = (new Date()).getMinutes() % arr.length
+  const rotations = new Date().getMinutes() % arr.length;
 
-  return rotations ? arr : arr.reverse()
-}
+  return rotations ? arr : arr.reverse();
+};
 ```
 
 The plan was to reverse the array if the minute where the user opened the page is odd. That worked very well when using dynamic SSR. But when switching to a JAMstack site which is statically generated, the feature turned into a bug. You can try it out by clicking on the link above and refresh after a minute. What happens is that names and text of the people are swapped correctly but the images stay the same. **Horrible!** And it happens because of the date mismatch between the server and the client. After [removing the deterministic shuffle code](https://github.com/Developmint/developmint.de/commit/d6db09833c9a2b4e0b2bcdfa9e4bdc93a2e27cf3#diff-9aa1b4d61222a570d303632c7712e59b) everything worked again as usual.
@@ -158,7 +158,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 1. Last but not least, let the hydration error appear again. Often, this is possible by reloading the page again but sometimes it’s more difficult.
 1. You now see that one of our breakpoints was triggered and script execution is stopped
-. Now open the DevTool’s console and write `elm` to get the DOM element where hydration fails. With the DOM element, you 1should be able to trace back the hydration error to one of your Vue components
+   . Now open the DevTool’s console and write `elm` to get the DOM element where hydration fails. With the DOM element, you 1should be able to trace back the hydration error to one of your Vue components
 1. Continue with the next steps
 
 PS: This is an adapted workflow of [this StackOverflow answer](https://stackoverflow.com/a/49202327/3975480) by user budden73.
@@ -185,10 +185,10 @@ The only drawback: The component is not included in the HTML returned by the ser
 
 Let’s wrap it up! Now you know more about:
 
-* What hydration is and what it does
-* How hydration can fail and how to spot hydration errors
-* Common reasons for bailed hydration
-* How to debug _your_ hydration error and fix your application
+- What hydration is and what it does
+- How hydration can fail and how to spot hydration errors
+- Common reasons for bailed hydration
+- How to debug _your_ hydration error and fix your application
 
 I hope that this post was insightful and you’ve learned a thing or two. Are you experiencing causes for hydration errors I haven’t described here or did I miss a common reason? Feel free to **message me** on Twitter or by mail.
 

@@ -1,15 +1,18 @@
 {
   "name": "lichter.io",
   "version": "6.0.0",
-  "description": "The personal website and online CV of Alexander Lichter, a passionate developer",
-  "author": "Alexander Lichter <npm@lichter.io>",
   "private": true,
+  "description": "The personal website and online CV of Alexander Lichter, a passionate developer",
   "license": "MIT",
+  "author": "Alexander Lichter <npm@lichter.io>",
   "scripts": {
     "dev": "vp run nuxt:dev",
     "build": "vp run nuxt:build",
     "generate": "vp run nuxt:generate",
-    "lint": "vp check --no-fmt"
+    "lint": "vp check"
+  },
+  "dependencies": {
+    "@nuxtjs/sitemap": "^7.6.0"
   },
   "devDependencies": {
     "@headlessui/vue": "^1.7.23",
@@ -40,8 +43,5 @@
     "typescript": "^5.9.3",
     "vite-plus": "catalog:"
   },
-  "packageManager": "pnpm@9.15.4",
-  "dependencies": {
-    "@nuxtjs/sitemap": "^7.6.0"
-  }
+  "packageManager": "pnpm@9.15.4"
 }

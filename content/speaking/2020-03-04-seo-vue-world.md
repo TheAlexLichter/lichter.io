@@ -12,6 +12,7 @@ topics:
   - seo
   - vue
 ---
+
 What do a SaaS landing page, blog and e-commerce store have in common? They should all be found
 through a search engine, ideally by as many people as possible.
 

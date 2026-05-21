@@ -29,9 +29,9 @@ This is **possible**. An example middleware could look like this:
 
 ```js [api/test.js]
 export default (req, res) => {
-  res.write('Hey!')
-  res.end()
-}
+  res.write("Hey!");
+  res.end();
+};
 ```
 
 When saved to `api/test.js` for example, you can then add it to your Nuxt config:
@@ -39,11 +39,9 @@ When saved to `api/test.js` for example, you can then add it to your Nuxt config
 ```js
 export default {
   // ...
-  serverMiddleware: [
-    { path: '/api/test', handler: '~/api/test' },
-  ],
+  serverMiddleware: [{ path: "/api/test", handler: "~/api/test" }],
   // ...
-}
+};
 ```
 
 If you rebuild your project in dev mode (`yarn run dev`) and visit `/api/test`, you can see `Hey!` as the page content. **Great!**
@@ -65,17 +63,17 @@ Possibly you have heard it the other way: An express app with Nuxt.js as rendere
 But **did you know** that you can use `express` inside a `serverMiddleware`?
 
 ```js
-import express from 'express'
-const app = express()
+import express from "express";
+const app = express();
 
-app.post('/', (req, res) => {
-    // Validate, sanitize and send
-})
+app.post("/", (req, res) => {
+  // Validate, sanitize and send
+});
 
 export default {
-  path: '/api/contact',
-  handler: app
-}
+  path: "/api/contact",
+  handler: app,
+};
 ```
 
 We declare the express app as the middleware handler and Nuxt is magically gluing everything together.
@@ -85,11 +83,9 @@ Now we can save this short snippet under `api/contact.js` and register our custo
 ```js
 export default {
   // ...
-  serverMiddleware: [
-    '~/api/contact'
-  ],
+  serverMiddleware: ["~/api/contact"],
   // ...
-}
+};
 ```
 
 ## Still missing: the mailer
@@ -103,12 +99,12 @@ _Fun fact_: Before this implementation I did not as I mostly write backends in L
 Since version 4.16.0, express has its own JSON middleware based on body-parser. To get our JSON parameters out of the POST body, we will need it:
 
 ```js
-import express from 'express'
-import nodemailer from 'nodemailer'
+import express from "express";
+import nodemailer from "nodemailer";
 
-const app = express()
+const app = express();
 
-app.use(express.json())
+app.use(express.json());
 // ...
 ```
 
@@ -117,44 +113,46 @@ app.use(express.json())
 Now we can get back to our `post` route. You may wonder why it’s declared as `/` instead of `/api/contact`. That’s because our `express` app’s base route is `/api/contact` (set through the `path` export).
 
 ```js
-import express from 'express'
-import validator from 'validator'
-import xssFilters from 'xss-filters'
+import express from "express";
+import validator from "validator";
+import xssFilters from "xss-filters";
 
-const app = express()
+const app = express();
 
-app.use(express.json())
+app.use(express.json());
 
-app.post('/', (req, res) => {
-  const attributes = ['name', 'email', 'msg'] // Our three form fields, all required
+app.post("/", (req, res) => {
+  const attributes = ["name", "email", "msg"]; // Our three form fields, all required
 
   // Map each attribute name to the validated and sanitized equivalent (false if validation failed)
-  const sanitizedAttributes = attributes.map(n => validateAndSanitize(n, req.body[n]))
+  const sanitizedAttributes = attributes.map((n) => validateAndSanitize(n, req.body[n]));
 
   // True if some of the attributes new values are false -> validation failed
-  const someInvalid = sanitizedAttributes.some(r => !r)
+  const someInvalid = sanitizedAttributes.some((r) => !r);
 
   if (someInvalid) {
     // Throw a 422 with a neat error message if validation failed
-    return res.status(422).json({ 'error': 'Ugh.. That looks unprocessable!' })
+    return res.status(422).json({ error: "Ugh.. That looks unprocessable!" });
   }
 
   // Upcoming here: sending the mail
-})
+});
 ```
 
 Let’s take a look at the `validateAndSanitize` function. It could be replaced with another express middleware or plugin but why not writing our own this time:
 
 ```js
 const rejectFunctions = new Map([
-  [ 'name', v => v.length < 4 ],
-  [ 'email', v => !validator.isEmail(v) ],
-  [ 'msg', v => v.length < 25 ]
-])
+  ["name", (v) => v.length < 4],
+  ["email", (v) => !validator.isEmail(v)],
+  ["msg", (v) => v.length < 25],
+]);
 const validateAndSanitize = (key, value) => {
   // If map has key and function returns false, return sanitized input. Else, return false
-  return rejectFunctions.has(key) && !rejectFunctions.get(key)(value) && xssFilters.inHTMLData(value)
-}
+  return (
+    rejectFunctions.has(key) && !rejectFunctions.get(key)(value) && xssFilters.inHTMLData(value)
+  );
+};
 ```
 
 Each possible attribute receives a `rejectFunction` that defines in which case the validation will fail. If the function returns false, the validation passed. It looks weird first but I like the reversed approach here because we can avoid a cascade of `if`s.
@@ -164,22 +162,22 @@ Each possible attribute receives a `rejectFunction` that defines in which case t
 After validating and sanitizing, we are confident that we can send the mail out!
 
 ```js
-import express from 'express'
-import nodemailer from 'nodemailer'
-import validator from 'validator'
-import xssFilters from 'xss-filters'
+import express from "express";
+import nodemailer from "nodemailer";
+import validator from "validator";
+import xssFilters from "xss-filters";
 // ...
 
-app.post('/', (req, res) => {
+app.post("/", (req, res) => {
   // ...
 
   if (someInvalid) {
-    return res.status(422).json({ 'error': 'Ugh.. That looks unprocessable!' })
+    return res.status(422).json({ error: "Ugh.. That looks unprocessable!" });
   }
 
-  sendMail(...sanitizedAttributes)
-  res.status(200).json({ 'message': 'OH YEAH' })
-})
+  sendMail(...sanitizedAttributes);
+  res.status(200).json({ message: "OH YEAH" });
+});
 ```
 
 We use the ES6 spread syntax to pass the sanitized values to the `sendMail` function:
@@ -188,16 +186,16 @@ We use the ES6 spread syntax to pass the sanitized values to the `sendMail` func
 const sendMail = (name, email, msg) => {
   const transporter = nodemailer.createTransport({
     sendmail: true,
-    newline: 'unix',
-    path: '/usr/sbin/sendmail'
-  })
+    newline: "unix",
+    path: "/usr/sbin/sendmail",
+  });
   transporter.sendMail({
     from: email,
-    to: 'support@developmint.de',
-    subject: 'New contact form message',
-    text: msg
-  })
-}
+    to: "support@developmint.de",
+    subject: "New contact form message",
+    text: msg,
+  });
+};
 ```
 
 Inside we create a nodemailer transporter and send the email out. We could do this through `SMTP`, other providers (e.g. SES) or (classically) through `sendmail` as I did. If you want to know more about the setup of nodemailer, [here you go](https://nodemailer.com/transports/sendmail/).

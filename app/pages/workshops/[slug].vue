@@ -1,17 +1,22 @@
 <script setup lang="ts">
-const route = useRoute()
+const route = useRoute();
 
-const { data: workshop } = await useAsyncData(`workshop-${route.params.slug}`, () => queryCollection('workshops').path(`/workshops/${route.params.slug}`).first())
+const { data: workshop } = await useAsyncData(`workshop-${route.params.slug}`, () =>
+  queryCollection("workshops").path(`/workshops/${route.params.slug}`).first(),
+);
 
 if (!workshop.value) {
-  throw createError({ statusCode: 404, fatal: true })
+  throw createError({ statusCode: 404, fatal: true });
 }
 
-provide('content-toc', computed(() => workshop.value?.body?.toc))
+provide(
+  "content-toc",
+  computed(() => workshop.value?.body?.toc),
+);
 
 const requestQuoteLink = computed(() => {
-  const prefix = 'mailto:alichter@developmint.de?subject=Workshop request: '
-  const title = workshop.value!.title
+  const prefix = "mailto:alichter@developmint.de?subject=Workshop request: ";
+  const title = workshop.value!.title;
   const suffix = `&body=Hi Alex,%0D%0A%0D%0Awe would like to request a quote for the ${title} workshop.%0D%0A%0D%0A
 
   Desired/Possible dates: %0D%0A
@@ -21,21 +26,20 @@ const requestQuoteLink = computed(() => {
   Amount of participants: %0D%0A%0D%0A
 
   Further comments or info:%0D%0A
-  `
-  return prefix + title + suffix
-})
+  `;
+  return prefix + title + suffix;
+});
 
 useSeoMeta({
   title: workshop.value.title,
-})
+});
 
-defineOgImageComponent('Workshop', {
+defineOgImageComponent("Workshop", {
   title: workshop.value.title,
   time: workshop.value.time,
   attendees: workshop.value.attendees ?? 20,
-  languages: workshop.value.languages ?? ['English', 'German'],
-})
-
+  languages: workshop.value.languages ?? ["English", "German"],
+});
 </script>
 
 <template>
@@ -54,17 +58,23 @@ defineOgImageComponent('Workshop', {
           <div class="prose md:prose-lg lg:prose-xl pt-0.5">
             <ContentRenderer :value="workshop!" />
           </div>
-          <AppButton :to="requestQuoteLink" class="hidden md:block mt-8 text-xl">Request quote</AppButton>
+          <AppButton :to="requestQuoteLink" class="hidden md:block mt-8 text-xl"
+            >Request quote</AppButton
+          >
         </div>
         <div>
           <div class="flex flex-col items-center mt-12">
             <div>
-              <img id="trainer" class="w-48 h-48 rounded-full mx-auto" width="192" height="192" src="/img/me@2x.jpg"
-                alt="Photo of Alexander Lichter">
+              <img
+                id="trainer"
+                class="w-48 h-48 rounded-full mx-auto"
+                width="192"
+                height="192"
+                src="/img/me@2x.jpg"
+                alt="Photo of Alexander Lichter"
+              />
               <AppLink to="/about/" class="underline hover:no-underline">
-                <AppParagraph class="mt-4 text-2xl text-center">
-                  Alexander Lichter
-                </AppParagraph>
+                <AppParagraph class="mt-4 text-2xl text-center"> Alexander Lichter </AppParagraph>
               </AppLink>
               <AppParagraph class="mt-2 text-center">
                 <b>Nuxt team member</b> &bull; Consultant &bull; Trainer

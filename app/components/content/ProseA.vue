@@ -1,8 +1,8 @@
 <script setup lang="ts">
 defineProps<{
-  href: string
-  target?: '_blank' | '_parent' | '_self' | '_top'
-}>()
+  href: string;
+  target?: "_blank" | "_parent" | "_self" | "_top";
+}>();
 </script>
 
 <template>

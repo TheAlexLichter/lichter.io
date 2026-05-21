@@ -24,13 +24,13 @@ Imagine a component called _Doggos_ that should show an image of a cute puppy. I
 The only thing our components needs is a template with a single image tag pointing to the path. Ideally by utilizing an alias:
 
 ```vue
-<img src="@/assets/doggos/riley.jpg">
-```  
+<img src="@/assets/doggos/riley.jpg" />
+```
 
 (with an alias for the source directory)
 
 ```vue
-<img src="../assets/doggos/riley.jpg">
+<img src="../assets/doggos/riley.jpg" />
 ```
 
 (relative path without alias)
@@ -46,7 +46,7 @@ A common attempt to load a dynamic image source in Vue or Nuxt is to utilize Vue
   <div>
     <div>
       <label v-for="doggo in dogNames" :key="doggo" style="margin-right: 2rem">
-        <input type="radio" :value="doggo" v-model="selectedDog">
+        <input type="radio" :value="doggo" v-model="selectedDog" />
         {{ doggo }}
       </label>
     </div>
@@ -55,22 +55,21 @@ A common attempt to load a dynamic image source in Vue or Nuxt is to utilize Vue
 </template>
 
 <script>
-
 export default {
-  data () {
+  data() {
     return {
       selectedDog: "",
-      dogNames: ["Riley", "Annie", "Marvin"]
-    }
-  }
-}
+      dogNames: ["Riley", "Annie", "Marvin"],
+    };
+  },
+};
 </script>
 ```
 
 All that is left to do is to retrieve the correct image for the `selectedDog`. Now one could think: “Nothing easier than that! `:src` to the rescue!”
 
 ```vue
-<img :src="`../assets/doggos/${selectedDog.toLowerCase()}.jpg`" :alt="selectedDog">
+<img :src="`../assets/doggos/${selectedDog.toLowerCase()}.jpg`" :alt="selectedDog" />
 ```
 
 Let’s add that line quickly and see what happens when we push the button mapped to Riley…
@@ -78,7 +77,7 @@ Let’s add that line quickly and see what happens when we push the button mappe
 **Bummer, a broken image** and only the alt tag! Let us take a look at the DOM. It contains the following image tag:
 
 ```vue
-<img src="../assets/doggos/riley.jpg" alt="Riley">
+<img src="../assets/doggos/riley.jpg" alt="Riley" />
 ```
 
 What does that mean?
@@ -102,12 +101,12 @@ Webpack will import static assets like `../assets/doggos/riley.jpg` as so-called
 After being processed, our initial image tag example `<img src="../assets/doggos/riley.jpg" alt="Riley">` will be compiled to a render function that will look similar to this code:
 
 ```js
-createElement('img', {
+createElement("img", {
   attrs: {
-    src: require('../assets/doggos/riley.jpg'), // this is now a module request
-    alt: 'Riley'
-    }
-})
+    src: require("../assets/doggos/riley.jpg"), // this is now a module request
+    alt: "Riley",
+  },
+});
 ```
 
 The image path has now been replaced with a Webpack _module request_. This works fine for static assets because **their paths are known at build time.** When it comes to dynamic content, including Vue’s `v-bind` directive, Webpack does not know what the expressions at runtime will evaluate to. That’s the reason why the common first idea as described above does not work as expected.
@@ -121,7 +120,7 @@ If we take a closer look at the compiled code of our simple image tag with the s
 To tell Webpack which images should be loaded, we have to issue a _module request_ on our own. This is done by calling `require(...)` with the correct path. In our situation, that would lead to the following image tag:
 
 ```vue
-<img :src="require(`../assets/doggos/${selectedDog.toLowerCase()}.jpg`)" :alt="selectedDog">
+<img :src="require(`../assets/doggos/${selectedDog.toLowerCase()}.jpg`)" :alt="selectedDog" />
 ```
 
 Instead of binding the `src` attribute to the image path, we bind it to the webpack module requested for the image path.
@@ -132,17 +131,17 @@ We can now extract that nasty part into an own computed property for better read
 export default {
   // ...
   computed: {
-    dogImage () {
+    dogImage() {
       if (!this.selectedDog) {
-        return
+        return;
       }
 
-      const fileName = this.selectedDog.toLowerCase()
+      const fileName = this.selectedDog.toLowerCase();
 
-      return require(`../assets/doggos/${fileName}.jpg`) // the module request
-    }
-  }
-}
+      return require(`../assets/doggos/${fileName}.jpg`); // the module request
+    },
+  },
+};
 ```
 
 It is **very important** that you are as strict as possible when it comes to the possible image file name. If we use the code from above, the final build will include every image with a `.jpg` extension in the `/assets/doggos` folder.
@@ -155,24 +154,26 @@ That happens because webpack cannot guess which of the images will actually be u
 
 Nowadays, responsive images are a must-have on your website. They don’t only save bandwidth but also time of your users _and_ are good for SEO. But how do we use `srcset` with dynamic images?
 
-_Almost_ the same way we do with the normal `src` tag! As we need a couple of images now, a computed property is the best way to build your final srcset string step by step. In our example, we want to use two dog pictures with different widths. The name format is always <DOG\_NAME>\_.jpg, which we can utilize. And we will also re-use our `dogImage` from above as fallback image.
+_Almost_ the same way we do with the normal `src` tag! As we need a couple of images now, a computed property is the best way to build your final srcset string step by step. In our example, we want to use two dog pictures with different widths. The name format is always <DOG_NAME>\_.jpg, which we can utilize. And we will also re-use our `dogImage` from above as fallback image.
 
 ```vue
 <template>
-  <img :srcset="this.dogSourceset" sizes="(max-width: 600px) 480px, 800px" :src="dogImage">
+  <img :srcset="this.dogSourceset" sizes="(max-width: 600px) 480px, 800px" :src="dogImage" />
 </template>
 
 <script>
 export default {
   // ...
   computed: {
-    dogSourceset () {
-        const baseName = this.selectedDog.toLowerCase()
-        return `${require(`@/assets/img/${this.baseName}_480.jpg`)} 480w, ${require(`@/assets/img/${this.baseName}_800.jpg`)} 800w`
+    dogSourceset() {
+      const baseName = this.selectedDog.toLowerCase();
+      return `${require(`@/assets/img/${this.baseName}_480.jpg`)} 480w, ${require(`@/assets/img/${this.baseName}_800.jpg`)} 800w`;
     },
-    dogImage () { /* ... */ }
-  }
-}
+    dogImage() {
+      /* ... */
+    },
+  },
+};
 </script>
 ```
 

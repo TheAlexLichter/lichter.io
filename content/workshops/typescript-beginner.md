@@ -14,57 +14,57 @@ Discover the magic of TypeScript in this Beginner's Workshop!
 
 ## Agenda
 
-* Introduction into TypeScript
-  * What is TypeScript?
-  * Why TypeScript?
-  * Other comparable languages
-* From JavaScript to TypeScript - Using a function as example
-  * Our first type notation
-  * Dealing with objects are parameters
-  * Optional parameters
-  * Optional object properties
-  * Typing variables
-* Further scenarios
-  * Combining type values (unions!)
-  * Narrowing types
-  * What is a Structural Type System exactly?
-  * Typing arrays
-  * Correctly defining function return types
-  * Map/Set types
-* Objects, Errors and more
-  * Type key/value pairs in various ways
-  * How to handle try/catch errors
-  * The unknown type
-  * The any type
-  * OBject properties as types
-* Type-Land Magic
-  * Composing Types
-  * Types from Types
-  * Partial Types
-  * Return Type of a function
-  * Getting the parameters of a function
-  * Get awaited values
-* Unions extended
-  * Union from object keys
-  * Get discriminated union members
-  * Get the union discriminator
-  * Frozen object literals
-  * Create a union from various values
-* Strings and Templates
-  * String types and patterns
-  * String matching
-  * The power of template types
-  * Union and Template Types
-* Generics
-  * What are generics?
-  * Generic functions
-  * Generic types
-  * Generic constraints
-  * Generic defaults
-  * Generic inference
-* Challenges
-  * Couple your types
-  * Refactor existing code to add types
+- Introduction into TypeScript
+  - What is TypeScript?
+  - Why TypeScript?
+  - Other comparable languages
+- From JavaScript to TypeScript - Using a function as example
+  - Our first type notation
+  - Dealing with objects are parameters
+  - Optional parameters
+  - Optional object properties
+  - Typing variables
+- Further scenarios
+  - Combining type values (unions!)
+  - Narrowing types
+  - What is a Structural Type System exactly?
+  - Typing arrays
+  - Correctly defining function return types
+  - Map/Set types
+- Objects, Errors and more
+  - Type key/value pairs in various ways
+  - How to handle try/catch errors
+  - The unknown type
+  - The any type
+  - OBject properties as types
+- Type-Land Magic
+  - Composing Types
+  - Types from Types
+  - Partial Types
+  - Return Type of a function
+  - Getting the parameters of a function
+  - Get awaited values
+- Unions extended
+  - Union from object keys
+  - Get discriminated union members
+  - Get the union discriminator
+  - Frozen object literals
+  - Create a union from various values
+- Strings and Templates
+  - String types and patterns
+  - String matching
+  - The power of template types
+  - Union and Template Types
+- Generics
+  - What are generics?
+  - Generic functions
+  - Generic types
+  - Generic constraints
+  - Generic defaults
+  - Generic inference
+- Challenges
+  - Couple your types
+  - Refactor existing code to add types
 
 ## Target audience and requirements
 

@@ -13,7 +13,6 @@ topics:
   - ssr
 ---
 
-
 Server-side rendering in Vue has lots of benefits. Especially with frameworks like Nuxt.js, developing SSR Vue applications is a breeze, no matter if you use dynamic SSR or static site generation. But on the other hand, server-side rendering also comes with a fair increase of complexity and errors you might have not seen before. While most of them are documented and workarounds are available, one error still boggles lots of minds: When Vue hydration fails.
 
 In this talk, we will have a deeper look into Vue's hydration process and explore together why it is needed in the first place, what it actually does and how it can "fail".

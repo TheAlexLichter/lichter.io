@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { TocLink } from '@nuxt/content'
+import type { TocLink } from "@nuxt/content";
 
 defineProps<{
-  links: TocLink[]
-}>()
+  links: TocLink[];
+}>();
 </script>
 
 <template>

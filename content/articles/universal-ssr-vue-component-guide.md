@@ -33,12 +33,12 @@ Rule of thumb: **Don’t call browser-specific APIs in `created` or `beforeCreat
 
 ```js [components/platform/check-availability.vue]
 export default {
-  created () {
-    if (typeof window !== 'undefined') {
-        window.scroll(/*...*/)
+  created() {
+    if (typeof window !== "undefined") {
+      window.scroll(/*...*/);
     }
-  }
-}
+  },
+};
 ```
 
 But in most situations, it is completely fine to call them in `beforeMount` or `mounted`. If you have to use an API on the server and the client, make sure to have to available on both sides (for example use `isomorphic-fetch` or `axios`) if you want to send AJAX requests.
@@ -83,10 +83,10 @@ The [matching example](https://1rmqv4xkx3.sse.codesandbox.io/directives) will sh
 
 Alright, let’s wrap it up, folks! If you want to go through the example code line by line, please take a look into [the CodeSandBox](https://codesandbox.io/s/1rmqv4xkx3).
 
-* Be careful when using _platform-specific_ APIs, especially `window` and `document`
-* Keep in mind that `created` and `beforeCreate` are executed on the server and client side. **No side effects, no `window`**
-* There is no reactivity on the server side
-* Using directives isn’t always the best abstraction. But if you do use them, provide a **server-side directive**
+- Be careful when using _platform-specific_ APIs, especially `window` and `document`
+- Keep in mind that `created` and `beforeCreate` are executed on the server and client side. **No side effects, no `window`**
+- There is no reactivity on the server side
+- Using directives isn’t always the best abstraction. But if you do use them, provide a **server-side directive**
 
 If you want further reading, I suggest reading the official [vue-ssr-docs](https://ssr.vuejs.org/)!
 

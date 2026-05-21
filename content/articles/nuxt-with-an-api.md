@@ -19,9 +19,9 @@ Also be aware that this post is **not about Nuxt 3**.
 
 There are three main approaches when it comes to using an API with Nuxt.js. Before telling you my opinion I’ll go through each of them.
 
-* [Leveraging Nuxt’s `serverMiddleware`](#servermiddleware)
-* [Using Nuxt programmatically](#using-nuxt-programmatically)
-* [Working with a standalone API](#working-with-a-standalone-api)
+- [Leveraging Nuxt’s `serverMiddleware`](#servermiddleware)
+- [Using Nuxt programmatically](#using-nuxt-programmatically)
+- [Working with a standalone API](#working-with-a-standalone-api)
 
 ### serverMiddleware
 
@@ -37,21 +37,19 @@ A small **example** (play around with it [here](https://codesandbox.io/s/github/
 
 ```js
 export default {
-  path: '/test',
+  path: "/test",
   handler(req, res) {
-    res.end('Everything ok!')
-  }
-}
+    res.end("Everything ok!");
+  },
+};
 ```
 
 `nuxt.config.js`
 
 ```js
 export default {
-  serverMiddleware: [
-    '~/serverMiddleware/ok'
-  ]
-}
+  serverMiddleware: ["~/serverMiddleware/ok"],
+};
 ```
 
 Hitting `/test` will show you `'Everything ok!'`. The request won’t go through Nuxt.js at all (as long as it’s the initial request and not rendered client-side).
@@ -65,40 +63,40 @@ If you already have an Express instance running and need Nuxt only for parts of 
 Nuxt will be used as a _middleware_ in such cases. Below is an example with Express:
 
 ```js
-const express = require('express')
-const consola = require('consola')
-const { Nuxt, Builder } = require('nuxt')
-const app = express()
-const host = process.env.HOST || '127.0.0.1'
-const port = process.env.PORT || 3000
+const express = require("express");
+const consola = require("consola");
+const { Nuxt, Builder } = require("nuxt");
+const app = express();
+const host = process.env.HOST || "127.0.0.1";
+const port = process.env.PORT || 3000;
 
-app.set('port', port)
+app.set("port", port);
 
 // Import and Set Nuxt.js options
-let config = require('../nuxt.config.js')
-config.dev = !(process.env.NODE_ENV === 'production')
+let config = require("../nuxt.config.js");
+config.dev = !(process.env.NODE_ENV === "production");
 
 async function start() {
   // Init Nuxt.js
-  const nuxt = new Nuxt(config)
+  const nuxt = new Nuxt(config);
 
   // Build only in dev mode
   if (config.dev) {
-    const builder = new Builder(nuxt)
-    await builder.build()
+    const builder = new Builder(nuxt);
+    await builder.build();
   }
 
   // Give nuxt middleware to express
-  app.use(nuxt.render)
+  app.use(nuxt.render);
 
   // Listen the server
-  app.listen(port, host)
+  app.listen(port, host);
   consola.ready({
     message: `Server listening on http://${host}:${port}`,
-    badge: true
-  })
+    badge: true,
+  });
 }
-start()
+start();
 ```
 
 ### Working with a standalone API
@@ -109,10 +107,10 @@ In case you are using another programming language for you API (say PHP, Python 
 
 Okay, there we go! My workflow and practices with APIs depend largely on:
 
-* Will the page be _statically generated_ or not?
-* Is the project _small_ or rather _larger_ (and how will this probably change in the future)?
-* Am I building a proof of concept or similar?
-* How is the actual API I want to use / I’ve built being implemented?
+- Will the page be _statically generated_ or not?
+- Is the project _small_ or rather _larger_ (and how will this probably change in the future)?
+- Am I building a proof of concept or similar?
+- How is the actual API I want to use / I’ve built being implemented?
 
 ## Small APIs
 
@@ -132,17 +130,17 @@ Most of my projects involving more complex or a non-trivial amount of API endpoi
 
 I see some huge benefits in using this approach:
 
-* No single point of failure - Have the API and Nuxt instance on two different servers, ideally with a backup one for each
-* Separation of Concerns - The Nuxt instance does not “own” the business logic and DB access (and vice-versa)
-* Easier Scaling - For the API you can use functions. Even if you don’t, you can put up load balancers and add more servers more easily
-* Testing each side standalone
-* Language-agnostic - Write your API in Python, Go, PHP, Elixir, Brainf\*ck, …
+- No single point of failure - Have the API and Nuxt instance on two different servers, ideally with a backup one for each
+- Separation of Concerns - The Nuxt instance does not “own” the business logic and DB access (and vice-versa)
+- Easier Scaling - For the API you can use functions. Even if you don’t, you can put up load balancers and add more servers more easily
+- Testing each side standalone
+- Language-agnostic - Write your API in Python, Go, PHP, Elixir, Brainf\*ck, …
 
 When using a standalone API (and having control over the server), please do not forget to set up a reverse-proxy, like NGINX, in front of your Nuxt instance and API, so you can:
 
-* proxy the API to `/api` or whatever route you want to avoid CORS issues (use the official [proxy module](https://github.com/nuxt-community/proxy-module) in dev mode to mimic the behavior)
-* add compression and caching headers
-* enable HTTPS, HTTP2, and HTTPS-only-connections
+- proxy the API to `/api` or whatever route you want to avoid CORS issues (use the official [proxy module](https://github.com/nuxt-community/proxy-module) in dev mode to mimic the behavior)
+- add compression and caching headers
+- enable HTTPS, HTTP2, and HTTPS-only-connections
 
 (and so on). As I’m hosting all my SSR-based apps and APIs on my own servers, this is a crucial point for me and improves perf _a lot_ if done right.
 

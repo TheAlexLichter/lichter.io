@@ -16,58 +16,58 @@ In this workshop, we will develop a real-life-like app with Nuxt.js together, fr
 
 ## Agenda
 
-* Why Nuxt
-  * What is Nuxt
-  * Benefits of Nuxt
-  * When to use Nuxt
-  * Overview of the Nuxt ecosystem
-* Vue Composition API (Refresher)
-  * What is the Composition API
-  * Composition vs. Options API
-  * Reactivity
-  * `<script setup>`
-* Initializing the Nuxt Project
-  * `nuxi` - Nuxt's CLI
-* Exploring the directory structure
-  * Initial Structure
-  * `app.vue`
-  * Further possible directories
-* Routing in Nuxt
-  * Pages with the `pages` folder
-  * Dynamic Routes
-  * Programmatic Navigation
-* Configuring your Nuxt application
-  * `nuxt.config.ts`
-  * Overview of the most important options
-* Layouts and Error Page
-  * Using different layouts for different pages
-  * Introducing a error page, e.g. for 404s
-* Rendering Modes (Theory block)
-  * Explaining the different rendering modes (SPA / SSR / SSG / ISG/ISR)
-  * Showcasing them based on the app we are building
-* Data Fetching
-  * Introducing `useFetch` and `useAsyncData`
-  * Explaining the data fetching lifecycle
-  * Exploring options of the composables
-  * `$fetch`
-* Composables
-  * Creating your own composables
-  * Utilizing `useState`
-  * Add VueUse to our project
-* SEO
-  * `useHead` and `useSeoMeta` composables
-  * SEO based on rendering modes
-* Runtime Config
-  * Handling env variables
-  * public vs. private runtime config
-* Nitro
-  * API routes
-  * Server middleware
-  * Type-safety
-* Deployment
-  * Deploying our page to Netlify
-* Outlook
-  * Further resources and topics that can be explored
+- Why Nuxt
+  - What is Nuxt
+  - Benefits of Nuxt
+  - When to use Nuxt
+  - Overview of the Nuxt ecosystem
+- Vue Composition API (Refresher)
+  - What is the Composition API
+  - Composition vs. Options API
+  - Reactivity
+  - `<script setup>`
+- Initializing the Nuxt Project
+  - `nuxi` - Nuxt's CLI
+- Exploring the directory structure
+  - Initial Structure
+  - `app.vue`
+  - Further possible directories
+- Routing in Nuxt
+  - Pages with the `pages` folder
+  - Dynamic Routes
+  - Programmatic Navigation
+- Configuring your Nuxt application
+  - `nuxt.config.ts`
+  - Overview of the most important options
+- Layouts and Error Page
+  - Using different layouts for different pages
+  - Introducing a error page, e.g. for 404s
+- Rendering Modes (Theory block)
+  - Explaining the different rendering modes (SPA / SSR / SSG / ISG/ISR)
+  - Showcasing them based on the app we are building
+- Data Fetching
+  - Introducing `useFetch` and `useAsyncData`
+  - Explaining the data fetching lifecycle
+  - Exploring options of the composables
+  - `$fetch`
+- Composables
+  - Creating your own composables
+  - Utilizing `useState`
+  - Add VueUse to our project
+- SEO
+  - `useHead` and `useSeoMeta` composables
+  - SEO based on rendering modes
+- Runtime Config
+  - Handling env variables
+  - public vs. private runtime config
+- Nitro
+  - API routes
+  - Server middleware
+  - Type-safety
+- Deployment
+  - Deploying our page to Netlify
+- Outlook
+  - Further resources and topics that can be explored
 
 ## Target audience and requirements
 

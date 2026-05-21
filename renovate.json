@@ -1,6 +1,4 @@
 {
-  "extends": [
-    "@nuxtjs"
-  ],
+  "extends": ["@nuxtjs"],
   "schedule": "before 3am on Monday"
 }

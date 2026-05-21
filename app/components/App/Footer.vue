@@ -1,88 +1,99 @@
 <script setup lang="ts">
 const navigation = {
   content: [
-    { name: 'Articles', to: '/articles/' },
-    { name: 'Talks & Podcasts', to: '/speaking/' },
-    { name: 'Videos', to: SOCIALS.youtube },
-    { name: 'Livestreams', to: SOCIALS.twitch },
+    { name: "Articles", to: "/articles/" },
+    { name: "Talks & Podcasts", to: "/speaking/" },
+    { name: "Videos", to: SOCIALS.youtube },
+    { name: "Livestreams", to: SOCIALS.twitch },
   ],
   general: [
-    { name: 'About', to: '/about/' },
+    { name: "About", to: "/about/" },
     // { name: 'My equipment', to: '/uses/' },
-    { name: 'Sponsors', to: '/sponsors/' },
-    { name: 'Topics', to: '/topics/' }
+    { name: "Sponsors", to: "/sponsors/" },
+    { name: "Topics", to: "/topics/" },
   ],
   services: [
-    { name: 'Consulting', to: '/consulting/' },
-    { name: 'Workshops', to: '/workshops/' },
+    { name: "Consulting", to: "/consulting/" },
+    { name: "Workshops", to: "/workshops/" },
     // { name: 'Projects', to: '/projects/' },
     // { name: 'Testimonials', to: '/testimonials/' },
   ],
-  contact: [
-    { name: 'Contact me', to: '/contact/' },
-  ],
+  contact: [{ name: "Contact me", to: "/contact/" }],
   social: [
     {
-      name: 'X',
+      name: "X",
       href: SOCIALS.twitter,
-      icon: 'ri:twitter-x-fill',
-      hoverClass: 'hover:text-blue-400'
+      icon: "ri:twitter-x-fill",
+      hoverClass: "hover:text-blue-400",
     },
     {
-      name: 'Mastodon',
+      name: "Mastodon",
       href: SOCIALS.mastodon,
-      icon: 'mdi:mastodon',
-      hoverClass: 'hover:text-gray-300',
+      icon: "mdi:mastodon",
+      hoverClass: "hover:text-gray-300",
     },
     {
-      name: 'GitHub',
+      name: "GitHub",
       href: SOCIALS.github,
-      icon: 'mdi:github',
-      hoverClass: 'hover:text-gray-200'
+      icon: "mdi:github",
+      hoverClass: "hover:text-gray-200",
     },
     {
-      name: 'YouTube',
+      name: "YouTube",
       href: SOCIALS.youtube,
-      icon: 'mdi:youtube',
-      hoverClass: 'hover:text-red-500'
+      icon: "mdi:youtube",
+      hoverClass: "hover:text-red-500",
     },
     {
-      name: 'Twitch',
+      name: "Twitch",
       href: SOCIALS.twitch,
-      icon: 'mdi:twitch',
-      hoverClass: 'hover:text-purple-500'
+      icon: "mdi:twitch",
+      hoverClass: "hover:text-purple-500",
     },
     {
-      name: 'LinkedIn',
+      name: "LinkedIn",
       href: SOCIALS.linkedin,
-      icon: 'mdi:linkedin',
-      hoverClass: 'hover:text-blue-500'
+      icon: "mdi:linkedin",
+      hoverClass: "hover:text-blue-500",
     },
     {
-      name: 'Feed',
-      href: '/feed.xml',
-      icon: 'mdi:rss',
-      hoverClass: 'hover:text-red-500'
+      name: "Feed",
+      href: "/feed.xml",
+      icon: "mdi:rss",
+      hoverClass: "hover:text-red-500",
     },
   ],
-}
+};
 </script>
 <template>
   <footer class="bg-zinc-900" aria-labelledby="footer-heading">
     <h2 id="footer-heading" class="sr-only">Footer</h2>
     <div class="mx-auto max-w-7xl px-6 pb-8 pt-8 sm:pt-16 lg:px-8 xl:pt-32">
       <div class="xl:grid xl:grid-cols-4 xl:gap-8">
-        <img loading="lazy" width="256" height="183" class="hidden xl:block xl:pr-16"
-          src="/img/logo/glyph-and-word-white-colored.svg" alt="">
-        <img loading="lazy" width="256" height="96" class="md:mx-auto xl:hidden" src="/img/logo/word-white-colored.svg"
-          alt="">
+        <img
+          loading="lazy"
+          width="256"
+          height="183"
+          class="hidden xl:block xl:pr-16"
+          src="/img/logo/glyph-and-word-white-colored.svg"
+          alt=""
+        />
+        <img
+          loading="lazy"
+          width="256"
+          height="96"
+          class="md:mx-auto xl:hidden"
+          src="/img/logo/word-white-colored.svg"
+          alt=""
+        />
         <div class="grid grid-cols-2 gap-8 xl:col-span-3 pt-16 xl:pt-0">
           <div class="md:grid md:grid-cols-2 md:gap-8">
             <div>
               <h3 class="text-sm font-semibold leading-6 text-white">Content</h3>
               <ul role="list" class="mt-6 space-y-4">
                 <li v-for="item in navigation.content" :key="item.name">
-                  <AppLink :to="item.to" class="text-sm leading-6 text-gray-300 hover:text-white">{{ item.name }}
+                  <AppLink :to="item.to" class="text-sm leading-6 text-gray-300 hover:text-white"
+                    >{{ item.name }}
                   </AppLink>
                 </li>
               </ul>
@@ -91,7 +102,8 @@ const navigation = {
               <h3 class="text-sm font-semibold leading-6 text-white">General</h3>
               <ul role="list" class="mt-6 space-y-4">
                 <li v-for="item in navigation.general" :key="item.name">
-                  <AppLink :href="item.to" class="text-sm leading-6 text-gray-300 hover:text-white">{{ item.name }}
+                  <AppLink :href="item.to" class="text-sm leading-6 text-gray-300 hover:text-white"
+                    >{{ item.name }}
                   </AppLink>
                 </li>
               </ul>
@@ -102,7 +114,8 @@ const navigation = {
               <h3 class="text-sm font-semibold leading-6 text-white">Services</h3>
               <ul role="list" class="mt-6 space-y-4">
                 <li v-for="item in navigation.services" :key="item.name">
-                  <AppLink :href="item.to" class="text-sm leading-6 text-gray-300 hover:text-white">{{ item.name }}
+                  <AppLink :href="item.to" class="text-sm leading-6 text-gray-300 hover:text-white"
+                    >{{ item.name }}
                   </AppLink>
                 </li>
               </ul>
@@ -111,7 +124,8 @@ const navigation = {
               <h3 class="text-sm font-semibold leading-6 text-white">Contact</h3>
               <ul role="list" class="mt-6 space-y-4">
                 <li v-for="item in navigation.contact" :key="item.name">
-                  <AppLink :to="item.to" class="text-sm leading-6 text-gray-300 hover:text-white">{{ item.name }}
+                  <AppLink :to="item.to" class="text-sm leading-6 text-gray-300 hover:text-white"
+                    >{{ item.name }}
                   </AppLink>
                 </li>
                 <li>
@@ -126,30 +140,43 @@ const navigation = {
           </div>
         </div>
       </div>
-      <div class="mt-16 border-t border-white/10 pt-8 sm:mt-20 lg:mt-24 md:flex md:items-center md:justify-between">
+      <div
+        class="mt-16 border-t border-white/10 pt-8 sm:mt-20 lg:mt-24 md:flex md:items-center md:justify-between"
+      >
         <div class="flex space-x-6 md:order-2">
-          <a target="_blank" v-for="item in navigation.social" :key="item.name" :href="item.href" class="text-gray-400"
-            :class="item.hoverClass">
+          <a
+            target="_blank"
+            v-for="item in navigation.social"
+            :key="item.name"
+            :href="item.href"
+            class="text-gray-400"
+            :class="item.hoverClass"
+          >
             <span class="sr-only">{{ item.name }}</span>
             <Icon :name="item.icon" class="h-6 w-6" aria-hidden="true" />
           </a>
         </div>
         <p class="mt-8 text-xs leading-5 text-gray-400 md:order-1 md:mt-0">
-          &copy; {{ new Date().getFullYear() }} Alexander Lichter
-          &bull;
-          Written content licensed under
-          <AppLink class="inline-block underline hover:no-underline"
-            to="https://creativecommons.org/licenses/by-nc-sa/4.0/">
+          &copy; {{ new Date().getFullYear() }} Alexander Lichter &bull; Written content licensed
+          under
+          <AppLink
+            class="inline-block underline hover:no-underline"
+            to="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+          >
             CC-BY-NC-SA 4.0
           </AppLink>
           &bull;
-          <AppLink class="inline-block underline hover:no-underline"
-            to="https://github.com/manniL/lichter.io">
+          <AppLink
+            class="inline-block underline hover:no-underline"
+            to="https://github.com/manniL/lichter.io"
+          >
             Code
           </AppLink>
-          licensed under 
-          <AppLink class="inline-block underline hover:no-underline"
-            to="https://opensource.org/licenses/MIT">
+          licensed under
+          <AppLink
+            class="inline-block underline hover:no-underline"
+            to="https://opensource.org/licenses/MIT"
+          >
             MIT
           </AppLink>
         </p>

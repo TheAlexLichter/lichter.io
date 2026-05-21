@@ -2,55 +2,69 @@
 // inherited attrs can mess up the satori parser
 defineOptions({
   inheritAttrs: false,
-})
+});
 
 const bgGradientStyle = {
-  backgroundImage: 'linear-gradient(to right, #dc2626, #be185d)',
-}
+  backgroundImage: "linear-gradient(to right, #dc2626, #be185d)",
+};
 
 const props = defineProps<{
-  title: string
-  topics?: string[]
-  readingTime?: string
-  datePublished?: string
-}>()
+  title: string;
+  topics?: string[];
+  readingTime?: string;
+  datePublished?: string;
+}>();
 
 // Ensure that longer titles don't seem too large
-const headingFontSizeClass = computed(() => 
-props.title.length > 30 ? 'text-5xl' : 'text-6xl')
-
+const headingFontSizeClass = computed(() => (props.title.length > 30 ? "text-5xl" : "text-6xl"));
 </script>
 <template>
   <div class="p-4 h-full w-full flex justify-center items-center" :style="bgGradientStyle">
-    <div class="p-10 bg-zinc-900 h-full w-full"
-      style="background-image: url(https://img.lichter.io/website-og/main-article.png); display: flex; flex-direction: column; justify-content: space-between;">
+    <div
+      class="p-10 bg-zinc-900 h-full w-full"
+      style="
+        background-image: url(https://img.lichter.io/website-og/main-article.png);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      "
+    >
       <div class="w-full h-full flex flex-col">
         <h1 class="font-bold text-white" :class="headingFontSizeClass">
           {{ title }}
         </h1>
-        <div class="text-white/75 text-xl flex-row flex-nowrap gap-0" style="display: flex; justify-content: space-between;">
-          <div class="flex-row flex-nowrap" style="display: flex; gap: 1rem;" v-if="topics?.length">
-            <span v-for="topic in topics" :key="topic">
-              #{{ topic }}
-            </span>
+        <div
+          class="text-white/75 text-xl flex-row flex-nowrap gap-0"
+          style="display: flex; justify-content: space-between"
+        >
+          <div class="flex-row flex-nowrap" style="display: flex; gap: 1rem" v-if="topics?.length">
+            <span v-for="topic in topics" :key="topic"> #{{ topic }} </span>
           </div>
           <div v-if="readingTime || datePublished">
             {{ readingTime }}
-            &bull;
-            Updated at {{ datePublished }}
+            &bull; Updated at {{ datePublished }}
           </div>
         </div>
       </div>
       <!-- Weird hack so the lower line is correct when rendering svg -->
-      <div class="flex-row flex-nowrap gap-0" style="display: flex; margin-top: -6rem;">
-        <div class="mr-auto flex-row flex-nowrap gap-0" style="display: flex;">
-          <img style="width: 64px; height: 64px;" class="mr-4 rounded-full mt-2" src="/img/me@2x.jpg" />
-          <div class="flex-col gap-0" style="display: flex; justify-content: center;">
+      <div class="flex-row flex-nowrap gap-0" style="display: flex; margin-top: -6rem">
+        <div class="mr-auto flex-row flex-nowrap gap-0" style="display: flex">
+          <img
+            style="width: 64px; height: 64px"
+            class="mr-4 rounded-full mt-2"
+            src="/img/me@2x.jpg"
+          />
+          <div class="flex-col gap-0" style="display: flex; justify-content: center">
             <div class="text-2xl leading-none text-white flex-nowrap gap-0">Alexander Lichter</div>
-            <div class="text-white/50 text-lg leading-none mt-2 flex-nowrap gap-0">https://lichter.io</div>
+            <div class="text-white/50 text-lg leading-none mt-2 flex-nowrap gap-0">
+              https://lichter.io
+            </div>
           </div>
         </div>
-        <img style="width: 64px; height: 64px; object-fit: contain;" src="/img/logo/glyph-white-colored.svg" />
+        <img
+          style="width: 64px; height: 64px; object-fit: contain"
+          src="/img/logo/glyph-white-colored.svg"
+        />
       </div>
     </div>
   </div>

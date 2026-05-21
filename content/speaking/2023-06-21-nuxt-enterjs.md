@@ -19,11 +19,11 @@ Abgesehen davon, dass wir eine kleine Anwendung bauen werden, werfen wir auch ei
 
 ## Vorkenntnisse
 
-* Grundkenntnisse in Vue und der Composition API sind hilfreich
+- Grundkenntnisse in Vue und der Composition API sind hilfreich
 
 ## Lernziele
 
-* Verständnis hinsichtlich der Unterschiede zwischen Vue und Nuxt
-* Übersicht über mögliche Use-Cases, wo Nuxt genutzt werden kann
-* Insights hinsichtlich Vorteilen und Features von Nuxt 3
-* Einblick in verschiedene Nuxt-Module
+- Verständnis hinsichtlich der Unterschiede zwischen Vue und Nuxt
+- Übersicht über mögliche Use-Cases, wo Nuxt genutzt werden kann
+- Insights hinsichtlich Vorteilen und Features von Nuxt 3
+- Einblick in verschiedene Nuxt-Module

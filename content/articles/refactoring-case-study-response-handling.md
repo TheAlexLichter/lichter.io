@@ -9,7 +9,6 @@ topics:
   - refactoring
 ---
 
-
 _Remark: The following advice and techniques are valid for many languages, not only Javascript! Also be aware that the upcoming information is opinionated._
 
 **Update (19.08.2018):** Improved the code by using _Map_
@@ -29,27 +28,27 @@ Think about taking a course or participating in a seminar. After people have sig
 Now here goes the code. Try to **read over it just once**:
 
 ```js
-const evaluateResponseOld = response => {
-  let text = ''
+const evaluateResponseOld = (response) => {
+  let text = "";
   if (response.valid) {
-    if (response.type === 'Confirmation') {
+    if (response.type === "Confirmation") {
       if (response.used) {
-        text = 'This token has already been used'
+        text = "This token has already been used";
       } else {
-        text = 'Thanks for your subscription'
+        text = "Thanks for your subscription";
       }
-    } else if (response.type === 'Cancellation') {
+    } else if (response.type === "Cancellation") {
       if (response.used) {
-        text = 'This token has already been used'
+        text = "This token has already been used";
       } else {
-        text = 'You have been unsubscribed successfully'
+        text = "You have been unsubscribed successfully";
       }
     }
   } else {
-    text = 'The provided code is invalid'
+    text = "The provided code is invalid";
   }
-  return text
-}
+  return text;
+};
 ```
 
 ### Problems of the initial code
@@ -81,25 +80,25 @@ So, why should we remove temporary variables from the code (as far as possible)?
 #### Code
 
 ```js
-const stepOne = response => {
+const stepOne = (response) => {
   if (response.valid) {
-    if (response.type === 'Confirmation') {
+    if (response.type === "Confirmation") {
       if (response.used) {
-        return 'This token has already been used'
+        return "This token has already been used";
       } else {
-        return 'Thanks for your subscription'
+        return "Thanks for your subscription";
       }
-    } else if (response.type === 'Cancellation') {
+    } else if (response.type === "Cancellation") {
       if (response.used) {
-        return 'This token has already been used'
+        return "This token has already been used";
       } else {
-        return 'You have been unsubscribed successfully'
+        return "You have been unsubscribed successfully";
       }
     }
   } else {
-    return 'The provided code is invalid'
+    return "The provided code is invalid";
   }
-}
+};
 ```
 
 ### Second iteration - Invert guarding if-statements
@@ -111,25 +110,25 @@ Guarding `if`s are, as the name might hint `if` conditions around a larger sub-b
 #### Code
 
 ```js
-const stepTwo = response => {
+const stepTwo = (response) => {
   if (!response.valid) {
-    return 'The provided code is invalid'
+    return "The provided code is invalid";
   } else {
-    if (response.type === 'Confirmation') {
+    if (response.type === "Confirmation") {
       if (response.used) {
-        return 'This token has already been used'
+        return "This token has already been used";
       } else {
-        return 'Thanks for your subscription'
+        return "Thanks for your subscription";
       }
-    } else if (response.type === 'Cancellation') {
+    } else if (response.type === "Cancellation") {
       if (response.used) {
-        return 'This token has already been used'
+        return "This token has already been used";
       } else {
-        return 'You have been unsubscribed successfully'
+        return "You have been unsubscribed successfully";
       }
     }
   }
-}
+};
 ```
 
 ### Third iteration - Remove else
@@ -143,23 +142,23 @@ Normally I’d replace all `else if`s with `if`s as well but to make the next it
 #### Code
 
 ```js
-const stepThree = response => {
+const stepThree = (response) => {
   if (!response.valid) {
-    return 'The provided code is invalid'
+    return "The provided code is invalid";
   }
 
-  if (response.type === 'Confirmation') {
+  if (response.type === "Confirmation") {
     if (response.used) {
-      return 'This token has already been used'
+      return "This token has already been used";
     }
-    return 'Thanks for your subscription'
-  } else if (response.type === 'Cancellation') {
+    return "Thanks for your subscription";
+  } else if (response.type === "Cancellation") {
     if (response.used) {
-      return 'This token has already been used'
+      return "This token has already been used";
     }
-    return 'You have been unsubscribed successfully'
+    return "You have been unsubscribed successfully";
   }
-}
+};
 ```
 
 ### Fourth iteration - Deal with duplications in the logic
@@ -173,21 +172,21 @@ If we look over our transformed code we now see clearly that the `response.used`
 #### Code
 
 ```js
-const stepFour = response => {
+const stepFour = (response) => {
   if (!response.valid) {
-    return 'The provided code is invalid'
+    return "The provided code is invalid";
   }
 
   if (response.used) {
-    return 'This token has already been used'
+    return "This token has already been used";
   }
 
-  if (response.type === 'Confirmation') {
-    return 'Thanks for your subscription'
-  } else if (response.type === 'Cancellation') {
-    return 'You have been unsubscribed successfully'
+  if (response.type === "Confirmation") {
+    return "Thanks for your subscription";
+  } else if (response.type === "Cancellation") {
+    return "You have been unsubscribed successfully";
   }
-}
+};
 ```
 
 ### Fifth iteration - Lookup table
@@ -203,47 +202,47 @@ We will create a `lookup` object and fill it with the response types which will 
 #### Code
 
 ```js
-const stepFive = response => {
+const stepFive = (response) => {
   if (!response.valid) {
-    return 'The provided code is invalid'
+    return "The provided code is invalid";
   }
 
   if (response.used) {
-    return 'This token has already been used'
+    return "This token has already been used";
   }
 
   const responseLookup = {
-    Confirmation: 'Thanks for your subscription',
-    Cancellation: 'You have been unsubscribed successfully'
-  }
+    Confirmation: "Thanks for your subscription",
+    Cancellation: "You have been unsubscribed successfully",
+  };
 
   if (responseLookup.hasOwnProperty(response.type)) {
-    return responseLookup[response.type]
+    return responseLookup[response.type];
   }
-}
+};
 ```
 
-You could also use a `Map` to increase the lookup speed (thanks to [Adrien Baron](https://twitter.com/BaronAdri) for the hint). 
+You could also use a `Map` to increase the lookup speed (thanks to [Adrien Baron](https://twitter.com/BaronAdri) for the hint).
 
 ```js
-const stepFiveWithMap = response => {
+const stepFiveWithMap = (response) => {
   if (!response.valid) {
-    return 'The provided code is invalid'
+    return "The provided code is invalid";
   }
 
   if (response.used) {
-    return 'This token has already been used'
+    return "This token has already been used";
   }
 
   const responseMap = new Map([
-    ['Confirmation','Thanks for your subscription'],
-    ['Cancellation','You have been unsubscribed successfully']
-  ])
+    ["Confirmation", "Thanks for your subscription"],
+    ["Cancellation", "You have been unsubscribed successfully"],
+  ]);
 
   if (responseMap.has(response.type)) {
-    return responseMap.get(response.type)
+    return responseMap.get(response.type);
   }
-}
+};
 ```
 
 Placing the lookup object outside would also be viable as long as the lookup object don’t change through the function. This makes your function _impure_ though, because it’ll then depend on an outside object and not only on it’s inputs.
@@ -252,25 +251,25 @@ To solve this, you could take both parameters (the `response` and the `lookupObj
 
 ```js
 const responseMap = new Map([
-  ['Confirmation', 'Thanks for your subscription'],
-  ['Cancellation', 'You have been unsubscribed successfully']
-])
+  ["Confirmation", "Thanks for your subscription"],
+  ["Cancellation", "You have been unsubscribed successfully"],
+]);
 
-const higherOrderStepFiveWithMap = lookupMap => response => {
+const higherOrderStepFiveWithMap = (lookupMap) => (response) => {
   if (!response.valid) {
-    return 'The provided code is invalid'
+    return "The provided code is invalid";
   }
 
   if (response.used) {
-    return 'This token has already been used'
+    return "This token has already been used";
   }
 
   if (lookupMap.has(response.type)) {
-    return lookupMap.get(response.type)
+    return lookupMap.get(response.type);
   }
-}
+};
 
-const stepFiveWithMap = higherOrderStepFiveWithMap(responseMap)
+const stepFiveWithMap = higherOrderStepFiveWithMap(responseMap);
 
 // Now use stepFiveWithMap(yourResponseObject)
 ```
@@ -308,24 +307,24 @@ Alright! The code looks readable, has no duplication and is easily maintainable.
 
 ```js
 const lookupMap = new Map([
-  ['Confirmation', 'Thanks for your subscription'],
-  ['Cancellation', 'You have been unsubscribed successfully']
-])
+  ["Confirmation", "Thanks for your subscription"],
+  ["Cancellation", "You have been unsubscribed successfully"],
+]);
 
-const simpleAndImpureStepFiveWithMap = response => {
+const simpleAndImpureStepFiveWithMap = (response) => {
   if (!response.valid) {
-    return 'The provided code is invalid'
+    return "The provided code is invalid";
   }
 
   if (response.used) {
-    return 'This token has already been used'
+    return "This token has already been used";
   }
 
   if (lookupMap.has(response.type)) {
-    return lookupMap.get(response.type)
+    return lookupMap.get(response.type);
   }
 
-  throw new Error('Invalid state while evaluating response')
+  throw new Error("Invalid state while evaluating response");
 
   /*
     we could also 'shorten' that a little with short-circuit:
@@ -334,7 +333,7 @@ const simpleAndImpureStepFiveWithMap = response => {
 
     return lookupMap.get(response.type) || invalid()
   */
-}
+};
 ```
 
 ## Wrapping it up
@@ -344,52 +343,52 @@ const simpleAndImpureStepFiveWithMap = response => {
 **Initial code**
 
 ```js
-const evaluateResponseOld = response => {
-  let text = ''
+const evaluateResponseOld = (response) => {
+  let text = "";
   if (response.valid) {
-    if (response.type === 'Confirmation') {
+    if (response.type === "Confirmation") {
       if (response.used) {
-        text = 'This token has already been used'
+        text = "This token has already been used";
       } else {
-        text = 'Thanks for your subscription'
+        text = "Thanks for your subscription";
       }
-    } else if (response.type === 'Cancellation') {
+    } else if (response.type === "Cancellation") {
       if (response.used) {
-        text = 'This token has already been used'
+        text = "This token has already been used";
       } else {
-        text = 'You have been unsubscribed successfully'
+        text = "You have been unsubscribed successfully";
       }
     }
   } else {
-    text = 'The provided code is invalid'
+    text = "The provided code is invalid";
   }
-  return text
-}
+  return text;
+};
 ```
 
-**Final* code*
+\*_Final_ code\*
 
 ```js
 const lookupMap = new Map([
-  ['Confirmation', 'Thanks for your subscription'],
-  ['Cancellation', 'You have been unsubscribed successfully']
-])
+  ["Confirmation", "Thanks for your subscription"],
+  ["Cancellation", "You have been unsubscribed successfully"],
+]);
 
-const simpleAndImpureStepFiveWithMap = response => {
+const simpleAndImpureStepFiveWithMap = (response) => {
   if (!response.valid) {
-    return 'The provided code is invalid'
+    return "The provided code is invalid";
   }
 
   if (response.used) {
-    return 'This token has already been used'
+    return "This token has already been used";
   }
 
   if (lookupMap.has(response.type)) {
-    return lookupMap.get(response.type)
+    return lookupMap.get(response.type);
   }
 
-  throw new Error('Invalid state while evaluating response')
-}
+  throw new Error("Invalid state while evaluating response");
+};
 ```
 
 ## Conclusion

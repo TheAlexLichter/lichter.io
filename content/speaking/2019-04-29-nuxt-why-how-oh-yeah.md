@@ -15,7 +15,7 @@ Nuxt.js - You probably have heard the name of the Vue.js framework a few times b
 Maybe when a colleague of yours gave it a try, or when you saw it on the GitHub report as the fourth fastest growing open source project in 2018....
 
 But of course, you as a smart developer are skeptical:
-Why would I need another framework that even sits on top of *another* one?
+Why would I need another framework that even sits on top of _another_ one?
 What is this trendy "SSR" buzzword?
 Which problems would Nuxt solve for me and how can I get started?
 During the talk I'll answer all of these questions and many more.
