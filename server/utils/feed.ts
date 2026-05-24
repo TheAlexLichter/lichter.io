@@ -5,7 +5,7 @@ import { queryCollection } from "@nuxt/content/server";
 import type { H3Event } from "h3";
 
 export async function generateBlogFeed(event: H3Event) {
-  const { url, name, currentLocale } = useSiteConfig(event);
+  const { url, name, currentLocale } = getSiteConfig(event);
   // Fetch all documents
   const feed = new Feed({
     title: `${name} | Blog`,
